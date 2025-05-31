@@ -1,0 +1,76 @@
+:root {
+  --primary: #004f91;
+  --secondary: #e3f2fd;
+  --card-bg: #ffffff;
+  --card-hover: #f1f8ff;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--secondary);
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: var(--primary);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header select {
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+main {
+  padding: 30px 20px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 12px var(--shadow);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px var(--shadow);
+  background-color: var(--card-hover);
+}
+
+.card .question {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.card .answer {
+  display: none;
+  margin-top: 10px;
+  padding-left: 18px;
+}
+
+.card .answer li {
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.card.active .answer {
+  display: block;
+}
