@@ -405,7 +405,7 @@ const cardData = {
     {
       "question": "2) Co je to intersticiální atom?",
       "answer": [
-        "Intersticiální atom (intersticiál) je atom umístěný v meziřízkové poloze krystalové mřížky.",
+        "Intersticiální atom (intersticiál) je atom umístěný v mezimřížkové poloze krystalové mřížky.",
         "Jedná se o jednu z bodových poruch krystalové struktury.",
         "Nevzniká nahrazením jiného atomu – tím vzniká substituční porucha.",
         "Chybějící atom je naopak vakance, jiný typ bodové poruchy."
@@ -669,7 +669,7 @@ const cardData = {
       "answer": [
         "Substituční atom – cizí atom nahradí atom v mřížce.",
         "Vakance – chybějící atom v krystalové struktuře.",
-        "Intersticiál – atom v meziřízkové poloze.",
+        "Intersticiál – atom v mezimřížkové poloze.",
         "Dislokace je čárová porucha, nikoliv bodová."
       ]
     },
