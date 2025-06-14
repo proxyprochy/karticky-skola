@@ -4,18 +4,17 @@ const cardData = {
       "question": "1) Chyby měření: třída přesnosti, chyba digitálního přístroje, šíření chyb ve výpočtech.",
       "answer": [
         "Třída přesnosti: Maximální povolená relativní chyba v % z měřicího rozsahu přístroje.",
-        "Chyba digitálního přístroje: Součet chyby z měřené hodnoty (v %) a chyby z rozsahu (ve formě digitů).",
-        "Např. ±(0,05 % + 2 digity): chyba se skládá z procenta měřené hodnoty a fixního počtu digitů.",
-        "Při výpočtech: absolutní chyby se sčítají při sčítání/odčítání, relativní při násobení/dělení."
+        "Chyba digitálního přístroje: Součet chyby čtení (v %) a chyby z rozsahu (ve formě digitů) - Např. ±(0,05 % + 2 digity).",
+        "Při výpočtech při sčítání/odčítání se sčítají absolutní chyby, při násobení/delění relativní chyby."
       ]
     }
     ,
     {
       "question": "2) Nejistoty měření: standardní nejistota typu A, typu B, kombinovaná a rozšířená nejistota.",
       "answer": [
-        "Typ A: Statistická nejistota vyhodnocená z opakovaných měření (výběrová směrodatná odchylka).",
-        "Typ B: Odhadnutá na základě jiných údajů (např. katalogové údaje přístroje).",
-        "Kombinovaná nejistota: Vypočítána jako odmocnina ze součtu čtverců jednotlivých standardních nejistot.",
+        "Typ A: Způsobena náhodnými jevy, určuje se statistickou analýzou opakovaných měření. Je to směrodatná odchylka aritmetického průměru měření, případně násobená korekčním koeficientem.",
+        "Typ B: Pramení ze známých a odhadnutelných příčin (tolerance, podmínky).",
+        "Kombinovaná nejistota: Vypočítána jako odmocnina ze součtu čtverců A a B.",
         "Rozšířená nejistota: Kombinovaná nejistota vynásobená koeficientem pokrytí (k), např. k=2 pro 95 %."
       ]
     }
@@ -23,57 +22,75 @@ const cardData = {
     {
       "question": "3) Měření el. proudu: přístroje pro měření DC a AC proudu, AC/DC komparátor.",
       "answer": [
-        "DC proud: Magnetoelektrické A-metry, digitální multimetry, zpětnovazební A-metry.",
-        "AC proud: Elektrodynamické, ferodynamické, indukční přístroje, převodníky s Hallovou sondou.",
-        "AC/DC komparátor: Srovnává stejné proudy různých typů pomocí přesného zesilovače a porovnání.",
-        "Přesné měření malých proudů: zpětnovazební měřiče s operačním zesilovačem (např. TIA)."
+        "Vliv ampérmetru: Reálný ampérmetr má nenulový vnitřní odpor, což vnáší systematickou chybu",
+        "DC proud: Magnetoelektrické A-metry: Levné, omezená přesnost, rozsahy ~10 μA až 1 A",
+        "DC proud: Digitální multimetry: Vysoká přesnost, rozsahy ~100 μA až ~1 A, vysoké rozlišení (až 10 nA u lab. přístrojů)",
+        "DC proud: Zpětnovazební A-metry: Měří velmi malé proudy (~1 pA až ~1 mA) s nulovým úbytkem na vstupu",
+        "DC proud: I/U převodník s Hallovou sondou: Měří DC i AC proudy (~100 mA až ~10 kA), poskytuje galvanické oddělení",
+        "AC proud: Magnetoelektrické s usměrňovači: Levné, omezená přesnost (kalibrováno pro sinus), frekvence do ~1 kHz.",
+        "AC proud: Elektromagnetické přístroje: Měří přímo efektivní hodnotu bez ohledu na tvar, frekvence do ~100 Hz, vhodné jako panelové měřidlo.",
+        "AC proud: Měřicí transformátory proudu: Pro AC, galvanické oddělení, vysoké proudy (~1 A až ~1 kA), dobrá přesnost.",
+        "AC/DC komparátor proudu: Přesně porovnává tepelné účinky neznámého AC proudu a známého DC proudu pomocí topného tělesa s termočlánkem k určení efektivní hodnoty)",
       ]
     },
     {
       "question": "4) Měření el. napětí: přístroje pro měř. DC a AC napětí, AC/DC komparátor, kompenzátor DC napětí.",
       "answer": [
-        "DC napětí: Magnetoelektrické voltmetry, digitální voltmetry, kompenzátory napětí.",
-        "AC napětí: Elektrodynamické voltmetry, TRMS měřiče s usměrněním a digitalizací signálu.",
-        "Kompenzátor: Měří napětí porovnáním s referenčním, dokud nezmizí proud mezi porovnávanými body.",
-        "AC/DC komparátor: Srovnává AC napětí s DC referencí – využívá se v etalonizaci."
+        "Vliv voltmetru: Reálný voltmetr má konečný vnitřní odpor, což způsobuje systematickou chybu.",
+
+        "DC napětí: Magnetoelektrické V-metry: Levné, omezená přesnost, rozsahy ~0,1 V - ~100 V.",
+        "DC napětí: Elektrostatické voltmetry: Měří velká napětí (až ~100 kV) s téměř nekonečným vnitřním odporem; elektronické verze pro nižší napětí.",
+        "DC napětí: Digitální multimetry: Vysoká přesnost, rozlišení ~0,1 μV (lab. přístroje), rozsahy ~0,1 V - ~1 kV.",
+
+        "Kompenzátor DC napětí: Porovnávání neznámého napětí s nastavitelným známým napětím. Vy vykompenzovaném stavu nezatěžuje měřený zdroj (ideální voltmetr)",
+
+        "AC napětí: Elektromagnetické přístroje: Měří efektivní hodnotu bez ohledu na tvar průběhu, rozsahy ~10 V až ~100 V, frekvence do ~100 Hz, vyšší vlastní spotřeba.",
+        "AC napětí: Magnetoelektrické s usměrňovači: Rozsahy ~1 V až ~100 V, problém tvaru průběhu (kalibrováno pro sinus), frekvence do ~10 kHz.",
+        "AC napětí: Digitální multimetry: Rozsahy ~0.1 V až ~100 V, často s True RMS převodníkem, frekvence do ~100 kHz",
+        "AC napětí: Měřicí transformátory napětí: Pro vysoká AC napětí (až ~10 kV), galvanické oddělení, pevný transformační poměr",
       ]
     },
     {
       "question": "5) Etalony el. napětí: Westonův článek, kvantový etalon napětí, elektronické etalony napětí.",
       "answer": [
-        "Westonův článek: Stabilní elektrochemický článek s napětím 1,01865 V, citlivý na teplotu, nepoužívat při odběru proudu.",
-        "Kvantový etalon: Využívá Josephsonův jev, extrémně přesné napětí odvozené z frekvence a fundamentálních konstant.",
+        "Westonův článek: Stabilní elektrochemický článek dávající zatíženém stavu konstantní DC napětí velikosti 1,01865 V. Problém: značná teplotní závislost a nedostatečná životnost (koroze přívodních vodičů a následné praskaní skleněné baňky).",
+        "Kvantový etalon: Využívá Josephsonova jevu (tunelování elektronů mezi supravodiči při 4 K). Generuje napětí kvantovaně na základě frekvence (f = 2eU/h), což poskytuje extrémně stabilní a přesnou referenci.",
         "Josephsonova konstanta: KJ90 = 483,5979 MHz/μV.",
-        "Elektronické etalony: Zenerova dioda s kompenzací teploty, např. LM399 – stabilní referenční napětí ~6,95 V."
+        "Elektronické etalony: Zenerovy diody: Využívají stabilní průrazné napětí Zenerových diod."
       ]
     }
     ,
     {
       "question": "6) Měření výkonu el. proudu: přístroje pro měření výkonu DC a AC proudu, konstanta W-metru.",
       "answer": [
-        "DC výkon: Výpočet z U a I, nebo přímé měření W-metrem.",
+        "Přístroje pro měření výkonu: voltmetry a ampérmetry (ručkové, elektronické, digitální).",
+        "Nepřímé měření (V-metrem a A-metrem).",
+        "Elektrodynamické W-metry: Přímé měření DC i AC výkonu, frekvenční rozsah DC až 100 Hz.",
+        "Ferodynamické W-metry: Přímé měření AC proudu, obvykle pro 50 Hz.",
         "AC výkon: Elektrodynamické, elektronické a digitální wattmetry (měří P = U·I·cos φ).",
-        "W-metrová konstanta: Určuje rozsah a citlivost přístroje pro dané napětí a proud.",
-        "Digitální wattmetry: Vzorkují napětí a proud, výkon se určuje integrací nebo DSP."
+        "Elektronické W-metry: Přímé měření DC i AC výkonu, frekvenční rozsah do 100 kHz.",
+        "Konstanta W-metru (kW): Koeficient přepočtu výchylky ručky na měřenou hodnotu. kW = (Un * In) / (αm * cosφjm), kde Un a In jsou napěťový a proudový rozsah, αm je max. výchylka stupnice a cosφjm je jmenovitý účiník W-metru.",
       ]
     }
     ,
     {
       "question": "7) Měření výkonu el. proudu v 3-fázové síti: metody měření činného a jalového výkonu.",
       "answer": [
-        "Metoda 3 wattmetrů: Používá 3 W-metry, měří každou fázi zvlášť – přesná pro nevyvážené soustavy.",
-        "Metoda 2 wattmetrů: Pro 3-fázové, 3-vodičové sítě – součet výkonů dvou přístrojů.",
-        "Jalový výkon: Rozdíl mezi součtem výkonů a činným výkonem nebo samostatné měření pomocí fázového posunu.",
-        "P = √3·U·I·cos φ, Q = √3·U·I·sin φ"
+        "Blondelův teorém: Pro měření celkového činného výkonu v n-vodičové soustavě je potřeba minimálně (n-1) wattmetrů",
+        "Měření činného výkonu ve čtyřvodičové síti (3 W-metry): Každý wattmetr měří výkon jedné fáze (proud jedné fáze, napětí fáze proti neutrálu). Celkový výkon je součet indikací: PZ = PW1 + PW2 + PW3",
+        "Měření činného výkonu ve třívodičové síti (3 W-metry s umělou nulou): Napěťové cívky wattmetrů se připojují na uměle vytvořený neutrální bod. Celkový výkon je součet indikací: PZ = PW1 + PW2 + PW3",
+        "Měření činného a jalového výkonu ve třívodičové síti – Aronovo zapojení (2 W-metry):",
+        "Blondelův teorém: Pro měření celkového činného výkonu v n-vodičové soustavě je potřeba minimálně (n-1) wattmetrů",
+        "Měření jalového výkonu ve třífázové síti pomocí 3 W-metrů (dle zdroje): Q3f = (PW1 + PW2 + PW3) / 3. (Pozn.: Tato konfigurace se pro měření jalového výkonu používá méně často než Aronovo zapojení.)",
       ]
     }
     ,
     {
       "question": "8) Měření spotřeby el. energie: přístroje pro měření spotřeby.",
       "answer": [
-        "Indukční elektroměry: Otáčející se kotouč, mechanický počet impulsů (Wh).",
-        "Elektronické elektroměry: Vzorkování proudu a napětí, výpočet energie digitálně.",
-        "Používají se integrace výkonu přes čas: E = ∫P(t)dt.",
+        "Spotřeba el. energie je integrál okamžitého výkonu v čase (E = ∫p(t)dt). Měřič energie funguje jako integrační wattmetr. Jednotka je obvykle kWh (1 kWh = 3.6 MJ)",
+        "Indukční elektroměry: Využívají Ferrarisův stroj s točivým magnetickým polem a počítadlem. Otáčky kotouče jsou úměrné spotřebované energii. Pouze pro 50/60 Hz. Relativně nízká přesnost (TP=2). Nízká citlivost, problémy s neharmonickými průběhy. Vysoká vlastní spotřeba, ale velká přetížitelnost a robustnost. Relativně levné",
+        "Elektronické (statické) elektroměry: Výhody: Větší přesnost, menší vlastní spotřeba, přesné měření i při malých odběrech a neharmonických průbězích. Nabízejí měření dalších parametrů (P, Q, S, U_RMS, I_RMS), časový záznam, SW konfiguraci, digitální/pulzní výstup a komunikaci (např. po síti)",
         "Měřiče umožňují záznam denních i měsíčních profilů spotřeby."
       ]
     }
@@ -81,10 +98,10 @@ const cardData = {
     {
       "question": "9) Zjišťování sledu fází.",
       "answer": [
-        "Sledu fází lze určit přístrojem na bázi střídavého napětí – využití rotujícího magnetického pole.",
-        "Tři fázová napětí se přivedou na indikátor, ten určí směr otáčení (např. otáčivý kotouč nebo světelné diody).",
-        "Použití: Správné zapojení 3-fázových motorů, vyvarování se reverzního chodu.",
-        "Změna sledu fází: výměna dvou fází mezi sebou (např. L1 a L2)."
+        "Zjišťování sledu fází je klíčové pro správné zapojení třífázových systémů.",
+        "Měřič sledu fází: Využívá principu asynchronního motoru – směr otáčení rotoru indikuje sled fází.",
+        "RC obvod s V-metrem: Podobně jako vadaska, ale místo doutnavky se používá voltmetr. Při správném sledu fází ukazuje voltmetr vyšší napětí než sdružené napětí sítě.",
+        "Měření jalového výkonu na kapacitní zátěži pomocí W-metru: Wattmetr registruje jalový výkon. Při správném sledu fází a kapacitní zátěži bude výchylka přístroje záporná.",
       ]
     }
     ,
@@ -101,100 +118,106 @@ const cardData = {
     {
       "question": "11) Měření frekvence: analogové měřiče frekvence, metoda Lissajousových obrazců, modulace jasu.",
       "answer": [
-        "Analogové měřiče: Např. rezonanční obvod s indikací rezonance (napětí max při f₀).",
-        "Lissajousovy obrazce: Na osciloskopu – vstupy do X a Y osy, počet průsečíků určuje poměr frekvencí.",
-        "Použití pro měření poměrů frekvencí nebo kalibraci.",
-        "Modulace jasu: Dvě sinusovky modulují jas paprsku na CRT obrazovce podle jejich rozdílové frekvence."
+        "Analogové měřiče frekvence: Určují frekvenci z četnosti kladných impulzů definovaného tvaru. Četnost pulzů se měří jako střední hodnota průběhu (magnetoelektrický systém). Používají se například v otáčkoměrech.",
+        "Porovnávání frekvencí metodou Lissajousových obrazců: Princip: Na osciloskopu v režimu XY se zobrazí obrazec vzniklý ze dvou signálů (měřený a referenční etalonový). Poměr frekvencí je dán převráceným poměrem počtu dotyků křivky s osami x a y. Pokud poměr není celočíselný, obrazec 'rotuje'",
+        "Porovnávání frekvencí metodou modulace jasu: Princip: Osciloskop pracuje v režimu XY, kde etalonový generátor vytvoří referenční elipsu. Měřený signál moduluje jas (vstup Z) osciloskopu. Počet přerušení obrazce (k) určuje, kolikrát je neznámý kmitočet větší než etalonový (fx = k*fn). Pokud k není celé číslo, obrazec 'rotuje'",
       ]
     }
     ,
     {
       "question": "12) Měření fázového posuvu: analogové a digitální fázoměry, použití osciloskopu a čítače k měření fáze.",
       "answer": [
-        "Analogové fázoměry: Elektrodynamické nebo ferodynamické – ukazují fázový posuv přímo.",
-        "Digitální fázoměry: Vzorkují průběhy napětí a proudu a určují fázový rozdíl výpočtem.",
-        "Osciloskop: Porovnání nulových průchodů obou signálů, výpočet fázového rozdílu z časového posunu.",
-        "Čítač: Měření doby mezi nulovými průchody dvou signálů – převod na úhel při známé periodě."
+        "Fázový posuv vyjadřuje vzájemnou polohu dvou sinusových průběhů stejného kmitočtu. Udává se ve stupních (360°/perioda) nebo radiánech (2π/perioda). Jde o měření časového posunutí (např. mezi průchody nulou)",
+        "Analogové fázoměry: Fázový posuv je převeden na šířku impulzu s konstantní výškou. Střední hodnota takového signálu je úměrná fázovému posuvu",
+        "Digitální fázoměry: Podobně jako analogové, ale výstup bistabilního klopného obvodu hradluje signál z oscilátoru. Počet čítaných pulzů je úměrný fázovému posuvu.",
+        "Měření fázového posuvu osciloskopem: Režim Y-t: Zobrazení obou signálů v čase. Časový posuv (∆t) a perioda (T) se odečítají z rastru. Fázový posuv φ = 2π * (∆t / T)",
+        "Měření fázového posuvu osciloskopem: Režim X-Y (Lissajousovy obrazce): Jeden signál na osu X, druhý na Y. Vznikne elipsa. Fázový posuv se vypočítá z poměru průsečíků elipsy s osami (např. sinφ = a/A).",
+        "Měření fázového posuvu čítačem: Signály jsou přivedeny na vstupy dvoukanálového čítače. Měří se perioda T a časové intervaly t_nn (pro průchody nahoru) a t_dd (pro průchody dolů).."
       ]
     }
     ,
     {
       "question": "13) Měření el. odporu: Ohmova metoda, srovnávací metody.",
       "answer": [
-        "Ohmova metoda: Rx = U/I – buď v zapojení s voltmetrem nebo ampérmetrem ve vhodném místě.",
-        "Chyby: Způsobené vnitřním odporem přístrojů, lze korigovat nebo minimalizovat výběrem zapojení.",
-        "Srovnávací metoda: Porovnání měřeného odporu s etalonem při shodném napětí/proudu.",
-        "Použití např. v mostových zapojeních nebo při přesném měření velkých odporů."
+        "Dvouvodičové připojení: Odpor přívodních vodičů se přičítá k měřenému odporu. Vhodné pro velké odpory.",
+        "Čtyřvodičové (Kelvinovo) připojení: Oddělené proudové a napěťové svorky eliminují vliv odporů přívodních vodičů, ideální pro přesné měření malých odporů.",
+        "Ohmova metoda: Odpor se určí z poměru měřeného napětí a proudu (Rx* = UV / IA).",
+        "Ohmova metoda: Zapojení I. (Voltmetr za ampérmetrem): Měřicí chyba je způsobena vlastní spotřebou voltmetru. Vhodné pro měření malých odporů (Rx << RV).",
+        "Ohmova metoda: Zapojení II. (Ampérmetr za voltmetrem): Měřicí chyba je způsobena vlastní spotřebou ampérmetru. Vhodné pro měření velkých odporů (Rx >> RA).",
+        "Srovnávací metody: Využívají Kirchhoffových zákonů pro děliče napětí/proudu s jedním známým odporem.",
+        "Srovnávací metody: Zapojení I. (Napěťový dělič s V-metry): Odpor se určí z poměru napětí na měřeném a referenčním odporu. Je vhodné pro malé odpory (Rx << RV).",
+        "Srovnávací metody: Zapojení II. (Proudový dělič s A-metry): Odpor se určí z poměru proudů měřeným a referenčním odporem. Je vhodné pro velké odpory (Rx >> RA). V obou srovnávacích metodách je třeba korigovat chyby způsobené vlastní spotřebou měřicích přístrojů.",
       ]
     }
     ,
     {
       "question": "14) Měření el. odporu: Wheatstoneův a Thomsonův můstek, dvouvodičové a čtyřvodičové připojení.",
       "answer": [
-        "Wheatstoneův můstek: Měření odporu srovnáním poměru odporů v mostu – rovnováha indikována nulovým proudem.",
-        "Thomsonův můstek: Modifikace pro přesné měření velmi malých odporů, odstraňuje chyby spojů.",
-        "Dvouvodičové připojení: Zahrnuje odpor vodičů, nevhodné pro malé hodnoty.",
-        "Čtyřvodičové připojení (Kelvinovo): Proud a napětí měřeny odděleně – přesné i pro malé odpory."
+        "Dvouvodičové připojení: Měří odpor vzorku plus odpor přívodních vodičů. Není přesné pro malé odpory, kde je odpor vodičů významný.",
+        "Čtyřvodičové (Kelvinovo) připojení: Má oddělené proudové a napěťové svorky. Proud prochází proudovými svorkami, ale napětí se měří na napěťových svorkách přímo na vzorku, což eliminuje vliv odporu přívodních vodičů",
+        "Wheatstoneův můstek: Princip Skládá se ze čtyř odporů v můstku a nulového indikátoru v diagonále",
+        "Wheatstoneův můstek: Rovnovážný stav: Napětí v diagonále je nulové. Podmínka rovnováhy: Rx/R2 = R3/R4, z čehož lze vypočítat Rx",
+        "Thomsonův můstek (Kelvinův můstek): Princip: Rozšíření Wheatstoneova můstku s přídavnými odpory, které umožňují čtyřvodičové připojení měřeného odporu. Tím se eliminuje vliv přechodových odporů mezi normálovým odporem a přívody",
       ]
     }
     ,
     {
       "question": "15) Etalony odporu: vinutý odporový etalon, QHE.",
       "answer": [
-        "Vinutý etalon: Vysoká stabilita, materiály jako manganin, použití bifilárního vinutí pro bezindukčnost.",
+        "Sekundární etalony odporu (vinuté rezistory): Vinuté rezistory z kovových slitin (např. manganin), s bifilárním (bezindukčním) vinutím.",
         "Vlastnosti: Odchylka typicky 0,001 %, velmi nízký teplotní koeficient.",
-        "QHE (kvantový Hallův jev): Primární etalon odporu – přesnost až 10⁻⁸.",
-        "Princip: Při vysoké magnetické indukci a nízké teplotě se odpor stává celočíselným násobkem konstanty RK = 25812,807 Ω."
+        "Primární etalon odporu (kvantový Hallův jev - QHE): Založeno na kvantovém Hallově jevu, který se projevuje na tenkovrstvých polovodičových strukturách (2D polovodiče) při teplotách blízkých absolutní nule a silném magnetickém poli. Podélný odpor klesá k nule a příčný odpor nabývá celočíselných násobků von Klitzingovy konstanty (K90 = 25812.807 Ω).",
       ]
     }
     ,
     {
       "question": "16) Měření impedancí: náhradní zapojení cívky a kondenzátoru, činitel jakosti, ztrátové číslo.",
       "answer": [
-        "Cívka a kondenzátor mají sériovou nebo paralelní náhradu – kombinace ideálního prvku a odporu.",
-        "Činitel jakosti (Q): Poměr reaktance k odporu (např. Q = ωL/R pro cívku).",
-        "Ztrátové číslo (D): Inverzní hodnota činitele jakosti (např. D = R/ωL pro cívku, D = tgδ pro kondenzátor).",
-        "Přepočet mezi náhradami umožňuje porovnání vlastností – důležité při měření parametru reálného prvku."
+        "Impedance (Z): Komplexní vyjádření odporu obvodu pro střídavý proud (Z = R + jX).",
+        "Cívka a kondenzátor mají sériovou nebo paralelní náhradu - kombinace ideálního prvku a odporu.",
+        "Činitel jakosti (Q): Vyjadřuje 'kvalitu' cívky. Je to poměr reaktance k sériovému odporu (Q = ωLs/Rs) nebo paralelnímu odporu k reaktanci (Q = Rp/ωLp). Čím vyšší Q, tím menší ztráty.",
+        "Ztrátové číslo (D):  Vyjadřuje míru ztrát v kondenzátoru. Je to převrácená hodnota činitele jakosti (D = 1/Q) a rovná se tg𝛿."
       ]
     }
     ,
     {
       "question": "17) Měření impedancí: měření V a A-metrem, měření V, A a W-metrem, metoda 3V resp. 3A.",
       "answer": [
-        "V a A-metr: Změřením U a I určíme Z = U/I, vhodné pro jednoduché měření.",
-        "V, A a W-metr: Umožňuje určit nejen impedanci, ale i činný výkon a fázový posun.",
-        "Metoda tří voltmetrů: Měří se napětí na celé zátěži a na jejích částech – výpočet I a φ.",
-        "Metoda tří ampérmetrů: Alternativa vhodná pro jiné topologie – výpočet pomocí známých proudů."
+        "Měření impedancí V-metrem a A-metrem: Princip: Využívá Ohmův zákon pro AC obvody (Z = U/I). Určuje pouze velikost impedance, nikoli její reálnou a imaginární složku (fázi). Pro cívky/kondenzátory se DC odpor/vodivost používá nepřesně pro složku R.",
+        "Měření impedancí V-metrem, A-metrem a W-metrem:: Princip: Kombinuje měření U, I a činného výkonu (P). Ze vztahu R = P/I^2 lze určit reálnou složku odporu. Z impedance Z = U/I a reálné složky se pak určí imaginární složka",
+        "Metoda tří V-metrů: Princip: Měřená impedance (Zx) a známý normálový rezistor (Rn) jsou zapojeny do série se zdrojem napětí. Měří se napětí na Zx, Rn a celkové napětí. Z naměřených hodnot lze vypočítat fázový posuv a následně reálnou a imaginární složku impedance. Předpokládá ideální voltmetry",
+        "Metoda tří A-metrů : Princip: Měřená impedance (Zx) a známý normálový rezistor (Rn) jsou zapojeny paralelně ke zdroji proudu. Měří se proudy do Zx, Rn a celkový proud. Z naměřených hodnot lze vypočítat fázový posuv a následně složky impedance. Předpokládá ideální ampérmetry"
       ]
     }
     ,
     {
       "question": "18) Měření impedancí: můstkové metody, obecný střídavý můstek.",
       "answer": [
-        "AC můstky: Umožňují měřit impedanci porovnáním s etalonem – např. Wienův, Scheringův, Maxwellův můstek.",
-        "Obecný AC můstek: Skládá se ze čtyř ramen, jedno obsahuje měřenou impedanci, ostatní známé prvky.",
-        "Rovnovážná podmínka: Napětí mezi diagonálou je nulové – z této podmínky vypočítáme Zx.",
-        "Použití: Velmi přesné měření, vhodné i pro malé nebo velké impedanční hodnoty."
+        "Můstkové metody: Pro přesné měření impedancí (odporů, kapacit, indukčností). Principem je porovnání neznámé impedance se známými normálovými impedancemi",
+        "Obecný střídavý můstek (Wheatstoneova typu): Princip: Skládá se ze čtyř impedancí zapojených do můstku. yvažování: Můstek se vyvažuje na minimální střídavé napětí v měřicí diagonále. Podmínky rovnováhy: Musí se rovnat poměr magnitud impedancí a také rozdíly fází na protilehlých větvích můstku",
+        "Rovnovážná podmínka: Napětí mezi diagonálou je nulové - z této podmínky vypočítáme Zx.",
+        "Můstky pro měření kondenzátorů: Např. Wienův můstek a Scheringův můstek.",
+        "Můstky pro měření cívek: Např. Owenův můstek, Maxwell-Wienův můstek a Belfisův můstek."
       ]
     }
     ,
     {
       "question": "19) Měření impedancí: rezonanční metody, Q-metr.",
       "answer": [
-        "Rezonanční metoda: Zapojení laděno na rezonanci – impedance je reálná, napětí na cívce/kondenzátoru max.",
-        "Z rezonance (f₀) se určí parametry prvků: f₀ = 1 / (2π√(LC)), Q = f₀ / Δf.",
-        "Q-metr: Speciální přístroj pro měření činitele jakosti, indukčností a kapacit.",
-        "Q-metr měří napětí a proud, ze kterých se přímo určí činitel jakosti Q."
+        "Rezonanční metody: Využívají princip rezonance LC obvodu. Rezonance je dosažena změnou kapacity ladicího kondenzátoru (CN) nebo změnou frekvence oscilátoru (f)",
+        "Q-metr: Rezonanční přístroj měřící činitel jakosti Q. Princip: Při rezonanci je výstupní napětí (U2) úměrné činiteli jakosti (Q), zatímco vstupní napětí (U1) je udržováno konstantní. Q = U2/U1 = ωLx/Rx. Měření indukčnosti a jakosti cívky: Cívka se připojí, najde se rezonanční frekvence (f) a kapacita (CN). Indukčnost (Lx) se vypočítá z rezonanční rovnice (Lx = 1/(4π^2f^2CN)), Q se odečte přímo",
+        "Q-metr: Měření kapacit kondenzátorů: Malé kapacity (Cx < CNmax): Měří se ve dvou krocích - změnou CN při konstantní f. Cx = CN1 - CN2 (rozdíl rezonančních kapacit bez a s Cx). Velké kapacity (Cx > CNmax): Měří se změnou f při konstantní CN. Cx = CN * (f1^2 - f2^2) / f2^2",
+        "Q-metr: Určení vlastní kapacity cívky (CL): Lze určit dvojím měřením nebo extrapolací"
       ]
     }
     ,
     {
       "question": "20) Měření impedancí: měření vzájemné indukčnosti a činitele vazby.",
       "answer": [
-        "Vzájemná indukčnost (M): Vyjadřuje, jak silně je propojeno magnetické pole dvou cívek.",
-        "Měří se pomocí zapojení se dvěma cívkami – měří se napětí indukované v druhé cívce.",
-        "Činitel vazby (k): k = M / √(L₁·L₂), kde L₁ a L₂ jsou vlastní indukčnosti cívek.",
-        "k ∈ (0,1), k=1 ideální vazba, k≈0 téměř žádná vazba."
+        "Vzájemná indukčnost (Mx): Vyjadřuje magnetickou vazbu mezi dvěma obvody.",
+        "Měření vzájemné indukčnosti pomocí A-metru a V-metru: Princip: Měří se proud (I1) procházející jednou cívkou a indukované napětí (U2) na druhé cívce",
+        "Měření vzájemné indukčnosti z vlastních indukčností: Princip: Dvě cívky se zapojí sériově dvěma způsoby: aditivně (tak, aby se indukčnosti sčítaly, L_a) a subtraktivně (tak, aby se odečítaly, L_b)",
+        "Činitel vazby: ?"
       ]
     }
     ,
@@ -392,741 +415,574 @@ const cardData = {
       ]
     }
   ],
-  eltm: [
-    {
-      "question": "1) Vodíková vazba – vlastnosti a zařazení",
-      "answer": [
-        "Vodíková vazba je slabší než kovalentní vazba.",
-        "Patří mezi sekundární vazby, nikoli primární.",
-        "Má elektrostatickou povahu – vzniká mezi vodíkem navázaným na elektronegativní atom (např. O, N, F) a jiným elektronegativním atomem.",
-        "Typická je pro molekuly vody, DNA, bílkoviny apod."
-      ]
-    },
-    {
-      "question": "2) Co je to intersticiální atom?",
-      "answer": [
-        "Intersticiální atom (intersticiál) je atom umístěný v mezimřížkové poloze krystalové mřížky.",
-        "Jedná se o jednu z bodových poruch krystalové struktury.",
-        "Nevzniká nahrazením jiného atomu – tím vzniká substituční porucha.",
-        "Chybějící atom je naopak vakance, jiný typ bodové poruchy."
-      ]
-    },
-    {
-      "question": "3) Zkouška pevnosti v tahu – charakteristika",
-      "answer": [
-        "Zkouška pevnosti v tahu je destruktivní metoda – zkoušený vzorek se poruší.",
-        "Slouží ke stanovení mechanických vlastností, např. meze kluzu nebo pevnosti v tahu.",
-        "Jde o statickou zkoušku – síla narůstá pomalu, ne dynamicky.",
-        "Používá se v materiálovém inženýrství k určení deformací a mezních hodnot."
-      ]
-    },
-    {
-      "question": "4) Jaké jsou vlastnosti litin oproti ocelím?",
-      "answer": [
-        "Litinou se označují slitiny železa s uhlíkem s obsahem > 2 % C.",
-        "Litiny jsou křehčí než oceli – snadno se lámou, ale mají dobrou slévatelnost.",
-        "Mají nižší houževnatost než oceli, nejsou vhodné pro dynamické namáhání.",
-        "Používají se tam, kde je důležitá tvarovatelnost a tlaková pevnost (např. bloky motorů)."
-      ]
-    },
-    {
-      "question": "5) Které kovy mají vysokou teplotu tání?",
-      "answer": [
-        "Mezi kovy s velmi vysokou teplotou tání patří například wolfram (W), který má nejvyšší teplotu tání ze všech kovů (~3422 °C).",
-        "Zirkonium má také poměrně vysokou teplotu tání (~1855 °C), používá se např. v jaderné energetice.",
-        "Železo (~1538 °C) a nikl (~1455 °C) mají nižší teploty tání než wolfram.",
-        "Vysoká teplota tání je důležitá pro materiály používané v extrémních teplotních podmínkách."
-      ]
-    },
-    {
-      "question": "6) Co říká pásová teorie o polovodičích?",
-      "answer": [
-        "Pásová teorie vysvětluje elektrické vlastnosti materiálů pomocí energetických pásů – valenční a vodivostní pás.",
-        "U polovodičů je mezi valenčním a vodivostním pásem zakázaný pás (bandgap) menší než 3 eV.",
-        "Vodivost vzniká přesunem elektronů z valenčního pásu do vodivostního, typicky zahřátím nebo dopingem.",
-        "Zakázaný pás není totožný s vodivostním ani valenčním pásem, ale je mezi nimi."
-      ]
-    },
-    {
-      "question": "7) Supravodiče II. typu – vlastnosti",
-      "answer": [
-        "Supravodiče II. typu obsahují tzv. vortexy – oblasti, kde proniká magnetické pole skrze materiál.",
-        "Mají dvě kritické teploty – mezi nimi je supravodivost částečně zachována.",
-        "Není nutné je chladit kapalným heliem – některé lze chladit kapalným dusíkem (levnější a dostupnější).",
-        "Používají se např. v silových aplikacích, MRI, magnetech pro urychlovače."
-      ]
-    },
-    {
-      "question": "8) Jaké vodivostní vlastnosti má stříbro?",
-      "answer": [
-        "Stříbro má nejvyšší elektrickou i tepelnou vodivost ze všech kovů.",
-        "Ještě vodivější než měď, ale kvůli ceně se méně často používá v běžné elektroinstalaci.",
-        "Používá se tam, kde je potřeba minimální odpor – např. konektory, kontakty.",
-        "Tepelná vodivost je důležitá i pro chlazení, např. ve vysokofrekvenčních obvodech."
-      ]
-    },
-    {
-      "question": "9) Jaké jsou požadavky na kontaktní materiály?",
-      "answer": [
-        "Kontaktní materiály musí mít vysokou elektrickou i tepelnou vodivost – zajišťují přenos proudu a odvádění tepla.",
-        "Dále musí mít nízký přechodový odpor (malý přechodový proud) pro co nejlepší spojení.",
-        "Odolnost vůči korozi a opotřebení je také důležitá.",
-        "Příkladem materiálů jsou stříbro, zlato nebo měděné slitiny."
-      ]
-    },
-    {
-      "question": "10) Pájecí slitiny typu SAC – vlastnosti",
-      "answer": [
-        "SAC pájky jsou bezolovnaté slitiny cínu s příměsí stříbra (Ag) a mědi (Cu).",
-        "Mají teplotu tání okolo 217–221 °C, tedy vyšší než klasické olovnaté pájky (183 °C).",
-        "Používají se zejména v ekologických a bezolovnatých výrobních procesech (RoHS).",
-        "Označení SAC je odvozeno od prvků: Sn (Tin), Ag (Silver), Cu (Copper)."
-      ]
-    },
-    {
-      "question": "11) Co je to nevlastní vodivost v polovodičích?",
-      "answer": [
-        "Nevlastní vodivost vzniká dopováním – záměrné přidání atomů jiných prvků do polovodiče.",
-        "Tyto prvky dodávají volné elektrony (donory) nebo díry (akceptory) do struktury.",
-        "Tím se zvyšuje vodivost oproti čistému (vlastnímu) polovodiči.",
-        "Používá se u křemíku, germania apod. – typy vodivosti N (negativní) a P (pozitivní)."
-      ]
-    },
-    {
-      "question": "12) Které lasery patří mezi plynové?",
-      "answer": [
-        "Plynové lasery využívají jako aktivní médium plyn – často směsi dvou nebo více plynů.",
-        "Helium-neonový laser je klasický příklad – často se používá v měřicí technice.",
-        "Argonový laser vyzařuje ve viditelné oblasti (např. modrozelené světlo) – využívá se např. v lékařství.",
-        "Rubínový laser je krystalický (ne plynový), gallium-fosfidový je polovodičový (laserová dioda)."
-      ]
-    },
-    {
-      "question": "13) Co platí o magnetické indukci?",
-      "answer": [
-        "Magnetická indukce se značí písmenem B.",
-        "Je to vektorová fyzikální veličina – má tedy směr i velikost.",
-        "Jednotkou je tesla (T), nikoli A/m (to je jednotka magnetického pole H).",
-        "Veličina H značí intenzitu magnetického pole, nikoli magnetickou indukci."
-      ]
-    },
-    {
-      "question": "14) Jaké magnetické vlastnosti mají diamagnetika?",
-      "answer": [
-        "Diamagnetika mají relativní permeabilitu menší než 1.",
-        "Jsou odpuzována magnetickým polem, mají zápornou magnetickou susceptibilitu.",
-        "Příklady: měď, bismut, zlato, voda.",
-        "Nevzniká u nich vlastní magnetické pole – je to slabý efekt."
-      ]
-    },
-    {
-      "question": "15) Co jsou magneticky tvrdé materiály?",
-      "answer": [
-        "Magneticky tvrdé materiály si dlouhodobě uchovávají magnetizaci – používají se pro permanentní magnety.",
-        "Příklady: NdFeB (neodym-železo-bór) a slitiny typu AlNiCo (hliník-nikl-kobalt).",
-        "Mají vysokou koercitivní sílu a remanenci.",
-        "Nejsou to např. magnetická skla nebo permendur – ty mají jiné vlastnosti."
-      ]
-    },
-    {
-      "question": "16) Z čeho se vyrábí permanentní magnety?",
-      "answer": [
-        "Permanentní magnety se vyrábí z feritů, slitin vzácných zemin (např. Sm, Nd) a slitin typu Al-Ni-Co.",
-        "Vyznačují se stabilní magnetizací bez nutnosti napájení.",
-        "Slitiny Fe-Ni (např. permalloy) se používají spíše v magneticky měkkých aplikacích (např. stínění).",
-        "Použití: reproduktory, motory, senzory, HDD."
-      ]
-    },
-    {
-      "question": "17) Co jsou dielektrické materiály?",
-      "answer": [
-        "Dielektrika jsou izolační materiály, které nevedou elektrický proud.",
-        "Mají schopnost polarizace – při působení elektrického pole se v nich přesouvají vazebné náboje.",
-        "Používají se např. v kondenzátorech jako dielektrikum mezi elektrodami.",
-        "Nevytváří samy o sobě vlastní elektrické pole – ale reagují na vnější."
-      ]
-    },
-    {
-      "question": "18) Jaké plyny patří mezi běžné izolanty?",
-      "answer": [
-        "Vzduch je nejběžnějším plynným izolantem – např. v rozvodech vysokého napětí.",
-        "Dusík se také používá jako izolační plyn, např. v plynových izolátorech.",
-        "Síra hexafluorid (SF₆) je výkonný izolační a zhášecí plyn v elektrických zařízeních.",
-        "Helium má slabší izolační schopnosti, používá se méně často."
-      ]
-    },
-
-    {
-      "question": "19) K čemu slouží minerální oleje v elektrotechnice?",
-      "answer": [
-        "Minerální oleje se používají jako izolanty a chladiva v transformátorech.",
-        "Získávají se rafinací ropy – nejsou syntetické ani získané z břidlic.",
-        "Mají dobré izolační vlastnosti a vysokou teplotní stabilitu.",
-        "Používají se také pro chlazení v některých typech motorů a rozvaděčů."
-      ]
-    },
-    {
-      "question": "20) Kde se v elektrotechnice používá slída?",
-      "answer": [
-        "Slída je vynikající elektrický izolant a má vysokou tepelnou odolnost.",
-        "Používá se jako součást izolačních systémů ve vysokonapěťových zařízeních.",
-        "Nachází využití také v kondenzátorech – mezi elektrodami jako dielektrikum.",
-        "Má formu tenkých vrstev, které se snadno štěpí a vrstveně ukládají."
-      ]
-    },
-    {
-      "question": "21) Mezi pevné organické izolanty patří…",
-      "answer": [
-        "Papír a kalafuna jsou organické materiály používané jako izolanty.",
-        "Papír bývá impregnován olejem, používá se např. v transformátorech.",
-        "Kalafuna se používá zejména jako pájecí tavidlo, ale má i izolační vlastnosti.",
-        "Slída a sklo jsou anorganické izolanty – vhodné pro vyšší teploty."
-      ]
-    },
-    {
-      "question": "22) Které plasty patří mezi termoplasty?",
-      "answer": [
-        "Polypropylen (PP) a polyethylen (PE) jsou typické termoplasty.",
-        "Termoplasty se po zahřátí stávají tvárnými a po ochlazení tuhnou – tento proces je vratný.",
-        "Nenasýcené polyesterové pryskyřice (UP) a epoxidy (EP) jsou termosety – po vytvrzení už se netaví.",
-        "Termoplasty se často používají jako izolanty v kabelech a krytech."
-      ]
-    },
-    {
-      "question": "23) Co označuje zkratka PTFE?",
-      "answer": [
-        "PTFE = polytetrafluorethylen, známý pod obchodním názvem Teflon.",
-        "Je to chemicky odolný polymer s výbornými izolačními vlastnostmi.",
-        "Používá se v elektrotechnice, kuchyňském nádobí a průmyslu.",
-        "Není totéž co PVC (polyvinylchlorid), PMMA (plexisklo) nebo polykarbonát."
-      ]
-    },
-    {
-      "question": "24) Co je to pyroelektrika?",
-      "answer": [
-        "Pyroelektrika označuje látky, u nichž vzniká elektrický náboj vlivem změny teploty.",
-        "Při rychlé změně teploty dochází k polarizaci – využívá se např. v senzorech pohybu.",
-        "Jsou to feroelektrické materiály, které se chovají jinak při dosažení Curieho teploty.",
-        "Typicky se používají v infra senzorech, detektorech plamene, IR kamerách apod."
-      ]
-    },
-    {
-      "question": "25) Co platí o kovové vazbě?",
-      "answer": [
-        "Kovová vazba vzniká mezi kladnými ionty kovu a volnými elektrony – jde o tzv. elektronový plyn.",
-        "Má kovový charakter, nikoli čistě elektrostatický.",
-        "Je to primární chemická vazba, nikoliv sekundární jako vodíková nebo Van der Waalsova.",
-        "Vyskytuje se ve všech kovech a kovových slitinách – zajišťuje jejich vodivost a kujnost."
-      ]
-    },
-    {
-      "question": "26) Jak vzniká iontová vazba?",
-      "answer": [
-        "Iontová vazba vzniká předáním elektronů z jednoho atomu (typicky kovu) na jiný (nekov).",
-        "Mezi vzniklými ionty (kationt a aniont) pak působí elektrostatická přitažlivost.",
-        "Nejsilnější je mezi prvky I. a VII. skupiny PSP (např. NaCl – sodík a chlor).",
-        "Je typická pro soli a sloučeniny kovů s nekovy."
-      ]
-    },
-    {
-      "question": "27) Jaké vlastnosti má van der Waalsova vazba?",
-      "answer": [
-        "Van der Waalsova vazba je velmi slabá – je slabší než kovalentní nebo vodíková vazba.",
-        "Patří mezi sekundární mezimolekulární interakce.",
-        "Založena na vzájemném působení dipólů, indukovaných dipólů a Londonových sil.",
-        "Významná je u nepolárních molekul a plynů (např. u vzácných plynů, vosků apod.)."
-      ]
-    },
-    {
-      "question": "28) Jak se liší čisté kovy a slitiny?",
-      "answer": [
-        "Čisté kovy mají lepší elektrickou vodivost než slitiny (např. měď, stříbro).",
-        "Slitiny bývají tvrdší, pevnější, ale méně vodivé.",
-        "Čisté kovy jsou často tvárnější a měkčí, vhodné pro vodiče.",
-        "Slitiny se využívají tam, kde je důležitá mechanická pevnost, korozní odolnost nebo speciální vlastnosti."
-      ]
-    },
-    {
-      "question": "29) Na co se používají oceli v elektrotechnice?",
-      "answer": [
-        "Oceli se používají např. pro hřídele točivých strojů – díky pevnosti a houževnatosti.",
-        "Také na stožáry vysokého a velmi vysokého napětí – vyžadují mechanickou pevnost a odolnost vůči povětrnosti.",
-        "Nejsou vhodné pro vinutí elektromotorů – k tomu se používají měděné vodiče.",
-        "Litiny se používají na méně namáhané odlitky – ocel je vhodnější pro pevnostní prvky."
-      ]
-    },
-    {
-      "question": "30) Z čeho se vyrábějí lehké a pevné konstrukční prvky?",
-      "answer": [
-        "Používají se slitiny hliníku – lehké, dobře obrobitelné, vhodné pro konstrukce.",
-        "Slitiny titanu jsou pevné a odolné vůči korozi, ale drahé – využití v letectví a medicíně.",
-        "Slitiny mědi a niklu se používají spíš pro elektrické vlastnosti, ne pro lehké konstrukce.",
-        "Důležitá je kombinace: nízká hmotnost, pevnost, korozní odolnost a zpracovatelnost."
-      ]
-    },
-    {
-      "question": "31) Které poruchy jsou bodové?",
-      "answer": [
-        "Substituční atom – cizí atom nahradí atom v mřížce.",
-        "Vakance – chybějící atom v krystalové struktuře.",
-        "Intersticiál – atom v mezimřížkové poloze.",
-        "Dislokace je čárová porucha, nikoliv bodová."
-      ]
-    },
-    {
-      "question": "32) Co znamená žárupevnost materiálu?",
-      "answer": [
-        "Žárupevnost je schopnost materiálu snášet mechanické namáhání i při vysokých teplotách po delší dobu.",
-        "Je důležitá např. u lopatek turbín, výfukových systémů, pecních dílů.",
-        "Není totéž co žáruvzdornost (odolnost vůči teplotě) nebo houževnatost.",
-        "Zajišťuje dlouhodobou funkčnost bez deformací nebo porušení."
-      ]
-    },
-    {
-      "question": "33) Co platí o slitinách železa?",
-      "answer": [
-        "Litiny jsou slitiny železa bohaté na uhlík (více než 2 % C).",
-        "Oceli jsou slitiny železa chudé na uhlík (do 2 % C).",
-        "Silikonizované oceli (s křemíkem) se používají pro elektrotechniku, nikoli pro polovodiče.",
-        "Jako vodiče se používají měď nebo hliník – železné slitiny se používají hlavně pro mechanické vlastnosti."
-      ]
-    },
-    {
-      "question": "34) K čemu se používá zinek?",
-      "answer": [
-        "Zinek se využívá jako protikorozní ochrana oceli – tzv. galvanizace (zinkování).",
-        "Je také součástí mosazných slitin (měď + zinek).",
-        "Používá se i jako ochrana proti rentgenovému záření a pro výrobu suchých článků.",
-        "Se železem se používá jen výjimečně – ne jako magnetický materiál."
-      ]
-    },
-    {
-      "question": "35) Co je zakázaný pás podle pásové teorie?",
-      "answer": [
-        "Zakázaný pás je energetický interval mezi valenčním a vodivostním pásem.",
-        "U izolantů má tento pás šířku > 3 eV.",
-        "U polovodičů je menší než 3 eV.",
-        "Elektrony musí překonat tento pás, aby se materiál stal vodivým."
-      ]
-    },
-    {
-      "question": "36) K čemu se používají supravodiče?",
-      "answer": [
-        "Supravodiče vedou elektrický proud bez odporu při teplotách pod kritickou teplotou.",
-        "Využívají se pro generování silných magnetických polí (např. MRI, urychlovače).",
-        "Používají se v energetice, např. ve speciálních kabelech.",
-        "Nepoužívají se pro ukládání energie – k tomu slouží jiné technologie."
-      ]
-    },
-    {
-      "question": "37) Jaké vlastnosti má hliník v elektrotechnice?",
-      "answer": [
-        "Hliník má nižší vodivost než měď – cca 60 %, ale je lehčí a levnější.",
-        "Používá se pro elektrovodná lana (např. VN, VVN, ZVN vedení).",
-        "Není vhodný pro jemné spoje – tvoří oxidy, hůře se pájí.",
-        "V duralu (hliník + hořčík + měď) se používá v konstrukcích, ne jako vodič."
-      ]
-    },
-    {
-      "question": "38) Mezi nekovové odporové materiály patří…",
-      "answer": [
-        "Grafit – dobrý vodič, používá se v rezistorech a kartáčích motorů.",
-        "Silit (karbid křemíku) – používá se v topných tělesech díky vysokému odporu a teplotní odolnosti.",
-        "Dural a nikelin jsou kovové materiály – nikelin je slitina s vysokým odporem, ale kovová.",
-        "Nekovové odporové materiály bývají stabilní při vysokých teplotách."
-      ]
-    },
-    {
-      "question": "39) Co platí pro polovodiče typu N?",
-      "answer": [
-        "U N-typu jsou majoritní nosiče elektrony.",
-        "Vzniká dopováním donory – např. prvky V. skupiny (As, P, Sb).",
-        "Elektrony přecházejí do vodivostního pásu – materiál se stává vodivým.",
-        "Používá se v diodách, tranzistorech, solárních článcích atd."
-      ]
-    },
-    {
-      "question": "40) Co platí pro kovové pájky?",
-      "answer": [
-        "Kovové pájky se používají pro metalurgické spojování kovů (měkké a tvrdé pájení).",
-        "Měkké pájení – do 450 °C (typicky cínové pájky).",
-        "Tvrdé pájení – nad 450 °C (mosaz, stříbro, Ni-slitiny).",
-        "Nejběžnější jsou pájky cínové, nikoli na bázi niklu a molybdenu."
-      ]
-    },
-    {
-      "question": "41) Co platí pro polovodiče typu P?",
-      "answer": [
-        "U P-typu jsou majoritní nosiče díry (chybějící elektrony ve valenčním pásu).",
-        "Vzniká dopováním akceptory – např. prvky III. skupiny (B, In, Ga, Al).",
-        "Díry se pohybují v opačném směru než elektrony.",
-        "Používá se v diodách, tranzistorech – tvoří PN přechody."
-      ]
-    },
-    {
-      "question": "42) Jaká podmínka musí platit pro šíření signálu ve světlovodu?",
-      "answer": [
-        "Pro totální odraz světla musí být index lomu jádra n1 > n2 (n2 je plášť).",
-        "Jinak by světlo unikalo z vlákna a nedošlo by k vedení.",
-        "Tento princip se využívá v optických vláknech pro přenos dat (internet, medicína).",
-        "Podmínka je zásadní pro efektivní šíření světla s minimálními ztrátami."
-      ]
-    },
-    {
-      "question": "43) Co platí o relativní permeabilitě?",
-      "answer": [
-        "Relativní permeabilita se značí μr.",
-        "U paramagnetik má hodnotu mírně větší než 1.",
-        "U diamagnetik má hodnotu menší než 1.",
-        "Hodnota μr udává schopnost materiálu vést magnetické pole ve srovnání s vakuem."
-      ]
-    },
-    {
-      "question": "44) Co se stane po vložení paramagnetika do magnetického pole?",
-      "answer": [
-        "Dojde k mírnému zesílení magnetického pole.",
-        "Paramagnetické látky mají kladnou susceptibilitu a magnetické dipóly se orientují ve směru pole.",
-        "Typickým příkladem je hliník, hořčík nebo kyslík (v kapalném stavu).",
-        "Oproti feromagnetikům je efekt mnohem slabší a není trvalý."
-      ]
-    },
-    {
-      "question": "45) Jaké jsou charakteristické vlastnosti magnetického materiálu?",
-      "answer": [
-        "Relativní permeabilita – udává schopnost vést magnetické pole.",
-        "Remanentní indukce – zbytková magnetizace po odstranění pole.",
-        "Koercitivní síla – odpor materiálu k rozmagnetování.",
-        "Seebeckův koeficient a permitivita souvisí s elektrickými, ne magnetickými vlastnostmi."
-      ]
-    },
-    {
-      "question": "46) Co jsou magnetická kovová skla?",
-      "answer": [
-        "Jsou to amorfní materiály – nemají krystalovou strukturu.",
-        "Většinou na bázi železa (Fe), někdy s přídavkem B, Si, Co.",
-        "Patří mezi magneticky měkké materiály – snadno se magnetizují a demagnetizují.",
-        "Používají se např. ve feritových jádrech, transformátorech a tlumivkách."
-      ]
-    },
-    {
-      "question": "47) Co je ztrátový úhel u dielektrik?",
-      "answer": [
-        "Ztrátový úhel udává míru ztrát energie ve formě tepla při střídavém elektrickém poli.",
-        "Je to doplňkový úhel k fázovému posunu mezi napětím a proudem.",
-        "Čím větší ztrátový úhel, tím horší izolační vlastnosti.",
-        "Značí se δ nebo někdy tangens δ (tg δ)."
-      ]
-    },
-    {
-      "question": "48) Kde se používá fluorid sírový (SF₆)?",
-      "answer": [
-        "Fluorid sírový je výborný izolační a zhášecí plyn.",
-        "Používá se hlavně v zapouzdřených rozvodnách vysokého napětí.",
-        "Díky své stabilitě a vysoké dielektrické pevnosti nahradil vzduch v některých aplikacích.",
-        "Kvůli vlivu na klima se jeho použití postupně omezuje."
-      ]
-    },
-    {
-      "question": "49) K čemu se používá keramika v elektrotechnice?",
-      "answer": [
-        "Keramika se používá pro výrobu průchodek a izolátorů.",
-        "Má vysokou elektrickou pevnost a odolnost vůči teplotám.",
-        "Není vhodná pro výrobu jader transformátorů – k tomu slouží ferity nebo plechy.",
-        "Najde uplatnění také v kondenzátorech, pojistkách a senzorech."
-      ]
-    },
-    {
-      "question": "50) Co platí o kalafuně?",
-      "answer": [
-        "Kalafuna se používá jako tavidlo při pájení – usnadňuje smáčení spoje cínem.",
-        "Je to organický pevný izolant, získávaný z pryskyřice jehličnatých stromů.",
-        "Nepatří mezi živočišné produkty – je rostlinného původu.",
-        "Používá se i v hudebních nástrojích (např. smyčce) a ve výtvarném umění."
-      ]
-    },
-    {
-      "question": "51) Které plasty mají vysokou tepelnou odolnost (> 200 °C)?",
-      "answer": [
-        "Polytetrafluorethylen (PTFE) (Teflon) – výborná chemická i tepelná odolnost.",
-        "Silikon (SI) – pružný, dobře odolává teplotám i stárnutí.",
-        "PVC a PMMA mají nižší teplotní odolnost – nejsou vhodné pro extrémní podmínky.",
-        "Používají se v elektrotechnice jako izolace, v kuchyňství i ve zdravotnictví."
-      ]
-    },
-    {
-      "question": "52) Co platí pro termoplastické elastomery?",
-      "answer": [
-        "Jsou to materiály, které mají při pokojové teplotě vlastnosti elastomerů (pružnost).",
-        "Zpracovávají se však jako termoplasty – tedy tavením, bez vulkanizace.",
-        "Nejsou směsí dvou elastomerů, ale často kombinací tvrdých a měkkých segmentů.",
-        "Používají se v automobilech, spotřebním zboží, těsněních apod."
-      ]
-    },
-    {
-      "question": "53) Mezi speciální dielektrika patří…",
-      "answer": [
-        "Pyroelektrika – jejich polarizace závisí na změně teploty.",
-        "Piezoelektrika – polarizace vzniká při mechanické deformaci.",
-        "Elektrety mají stálou polarizaci a nepodléhají běžným vnějším vlivům jako teplota či tlak.",
-        "Tyto materiály se využívají v senzorech, zapalovačích a mikrofonech."
-      ]
-    },
-    {
-      "question": "54) Co platí o termotropních kapalných krystalech?",
-      "answer": [
-        "Termotropní kapalné krystaly se používají na výrobu displejů (LCD).",
-        "Vznikají tavením pevných krystalů – ne z roztoku jako lyotropní.",
-        "Jejich struktura závisí na teplotě – mění optické vlastnosti.",
-        "Používají se ve vizualizaci tepla, zobrazovačích a senzorech."
-      ]
-    },
-    {
-      "question": "55) Co je vakance v krystalové mřížce?",
-      "answer": [
-        "Vakance je bodová porucha – chybí atom na svém místě v mřížce.",
-        "Je to jeden z typů defektů – vedle substitučního atomu a intersticiálu.",
-        "Nepatří mezi čárové poruchy (např. dislokace).",
-        "Ovlivňuje vodivost, mechanické vlastnosti a difuzi atomů."
-      ]
-    },
-    {
-      "question": "56) Mezi kovy se střední nebo vysokou teplotou tání patří…",
-      "answer": [
-        "Chrom – vysoká teplota tání (~1907 °C), používá se v metalurgii a galvanickém pokovování.",
-        "Měď má nižší teplotu tání (~1085 °C), lithium je měkký kov s nízkou teplotou tání.",
-        "Bismut má také nízkou teplotu tání (~271 °C), není považován za vysoce tavitelný kov.",
-        "Vysokotavitelné kovy se používají v extrémních teplotních aplikacích."
-      ]
-    },
-    {
-      "question": "57) Co říká pásová teorie o kovech?",
-      "answer": [
-        "U kovů se vodivostní pás překrývá s valenčním pásem.",
-        "To umožňuje volný pohyb elektronů – vysoká elektrická vodivost.",
-        "Není zde zakázaný pás jako u polovodičů a izolantů.",
-        "Pásová struktura vysvětluje rozdíly v elektrické vodivosti materiálů."
-      ]
-    },
-    {
-      "question": "58) Co platí pro bimetaly?",
-      "answer": [
-        "Bimetaly se používají v tepelných jističích a termostatech.",
-        "Jsou tvořeny dvěma různými kovy s rozdílnou roztažností.",
-        "Při ohřevu dochází k deformaci – spínání/rozpínání kontaktu.",
-        "Nejde o materiály určené do tavných pojistek."
-      ]
-    },
-    {
-      "question": "59) Co jsou slitiny mědi?",
-      "answer": [
-        "Mosazi – slitiny mědi a zinku.",
-        "Bronzy – slitiny mědi a cínu, případně s jinými kovy, ale bez zinku.",
-        "Mosaz může mít různé vlastnosti v závislosti na přísadách.",
-        "Bronz je houževnatější a odolnější vůči korozi než mosaz."
-      ]
-    },
-    {
-      "question": "60) Co je vlastní (intrinsická) vodivost polovodiče?",
-      "answer": [
-        "Vlastní vodivost je určena vodivostí základního materiálu, bez dopování.",
-        "Vzniká tepelným buzením elektronů z valenčního do vodivostního pásu.",
-        "Vyskytuje se např. u čistého křemíku nebo germania.",
-        "Na rozdíl od příměsové vodivosti není ovlivněna donory/akceptory."
-      ]
-    },
-    {
-      "question": "61) Jak se používá uhlík v elektrotechnice?",
-      "answer": [
-        "Uhlík se používá jako odporový materiál – např. v rezistorech, kartáčích motorů.",
-        "Používá se i jako kontaktní materiál – odolný vůči jiskření a oxidaci.",
-        "Najde uplatnění v bateriích, obloukových lampách a elektrolytických aplikacích.",
-        "Není běžně použit v polovodičích nebo pojistkách."
-      ]
-    },
-    {
-      "question": "62) Které látky patří mezi diamagnetika?",
-      "answer": [
-        "Měď je diamagnetická – slabě odpuzována magnetickým polem.",
-        "Supravodiče mají dokonalé diamagnetické chování (Meissnerův jev).",
-        "Diamagnetika mají relativní permeabilitu menší než 1.",
-        "Nikl je feromagnetický, transformátorové plechy jsou z magnetických materiálů."
-      ]
-    },
-    {
-      "question": "63) Jaká je přibližná relativní permitivita vody?",
-      "answer": [
-        "Voda jako polární látka má relativní permitivitu ~80 při pokojové teplotě.",
-        "Díky tomu je vynikajícím dielektrikem v elektrolytech a kondenzátorech.",
-        "Pro srovnání – vakuum má hodnotu 1, vzduch ~1,0006.",
-        "Hodnota permitivity určuje schopnost materiálu uchovávat elektrickou energii."
-      ]
-    },
-    {
-      "question": "64) Které látky patří mezi magnetické měkké materiály?",
-      "answer": [
-        "Permalloy – slitina niklu a železa, s velmi nízkou koercivitou.",
-        "Křemíkové oceli – používají se v jádrech transformátorů a elektromotorů.",
-        "Mají vysokou permeabilitu a nízké ztráty při střídavém magnetickém poli.",
-        "SmCo a magnetika na bázi vzácných zemin jsou tvrdé magnetické materiály."
-      ]
-    },
-    {
-      "question": "65) Charakteristické vlastnosti plynných izolantů",
-      "answer": [
-        "Mají nízké dielektrické ztráty, což je činí vhodnými pro vysokonapěťová zařízení.",
-        "Dielektrické ztráty závisí na frekvenci, nejsou konstantní.",
-        "Plynné izolanty neobnovují svou strukturu po průrazu – na rozdíl od některých kapalin.",
-        "Používají se např. dusík, SF₆ (fluorid sírový), vzduch."
-      ]
-    },
-    {
-      "question": "66) Kapalné izolanty v elektrotechnice",
-      "answer": [
-        "Minerální oleje – nejčastěji používané kapalné izolanty v transformátorech.",
-        "Syntetické oleje – např. silikonové, používají se při vyšších teplotách.",
-        "Fluorid sírový (SF₆) je plyn, nikoli kapalina.",
-        "Živočišné oleje se běžně v elektrotechnice nepoužívají."
-      ]
-    },
-    {
-      "question": "67) Vlastnosti polymerů s lineární strukturou",
-      "answer": [
-        "Lineární polymery jsou převážně termoplasty – dobře tvarovatelné teplem.",
-        "Jsou většinou tavitelné – dají se recyklovat a znovu zpracovat.",
-        "Na rozdíl od reaktoplastů nejsou po vytvrzení již nezměnitelné.",
-        "Používají se např. polyethylen, polypropylen, PVC."
-      ]
-    },
-    {
-      "question": "68) Co jsou elastomery?",
-      "answer": [
-        "Jsou to materiály s velkými vratnými deformacemi při malém zatížení.",
-        "Patří mezi ně např. kaučuky, silikony, TPU.",
-        "Lze je částečně zpracovávat jako termoplasty (např. TPE).",
-        "Mají nízkou tuhost, vysokou pružnost, často se používají v těsnění, rukavicích, pružných spojích."
-      ]
-    },
-    {
-      "question": "69) Co jsou ferolelektrika?",
-      "answer": [
-        "Ferolelektrika jsou látky, které mají spontánní polarizaci, měnitelnou elektrickým polem.",
-        "Jsou analogické feromagnetikům, ale v elektrickém poli.",
-        "Používají se jako dielektrika v kondenzátorech a senzorech.",
-        "Příkladem je např. titanát barnatý (BaTiO₃)."
-      ]
-    },
-    {
-      "question": "70) Podmínky vzniku termotropních kapalných krystalů",
-      "answer": [
-        "Pro vznik termotropních kapalných krystalů je třeba určitá oblast teplot.",
-        "Struktura těchto krystalů závisí na teplotních změnách.",
-        "Na rozdíl od lyotropních nevyžadují roztok nebo rozpouštědlo.",
-        "Používají se v LCD displejích, teplotních senzorech, optice."
-      ]
-    },
-    {
-      "question": "71) Co platí pro vodivé materiály?",
-      "answer": [
-        "Stříbro je nejlepší elektrický vodič – nejnižší odpor (~1,59×10⁻⁸ Ω·m).",
-        "Vodivé materiály mají velmi nízkou rezistivitu (~10⁻⁸ Ω·m).",
-        "Zlato je také dobrý vodič, ale horší než stříbro – používá se pro své chemické vlastnosti.",
-        "Používají se v kabelech, spojích, elektrodách."
-      ]
-    },
-    {
-      "question": "72) Odporové materiály – příklady",
-      "answer": [
-        "Konstantan – slitina mědi a niklu, stabilní odpor, málo závislý na teplotě.",
-        "Chromnikl (např. CrNi80) – vysoká odolnost, vhodný pro topné odpory.",
-        "Mosaz není ideální pro odporové prvky, spíš pro kontakty.",
-        "Ferit je magnetický materiál, nepoužívá se jako odporový."
-      ]
-    },
-    {
-      "question": "73) Materiály pro jádra optických vláken",
-      "answer": [
-        "Syntetický křemen – běžně používaný pro jádra optických vláken díky nízkému útlumu.",
-        "Fluoridové sklo – speciální vlákna pro IR oblast.",
-        "PMMA (polymethylmetakrylát) se používá v levnějších plastových vláknech.",
-        "PTFE nemá vhodné optické vlastnosti pro jádro světlovodů."
-      ]
-    },
-    {
-      "question": "74) Magnetické momenty domén a jejich natáčení",
-      "answer": [
-        "Ve feromagnetikách se domény při působení magnetického pole natáčejí do jeho směru.",
-        "To vede ke zvýšení celkové magnetizace.",
-        "Ferimagnetika mají opačně orientované domény s nestejnou velikostí momentu.",
-        "V paramagnetikách dochází k menšímu uspořádání, diamagnetika pole slabě odpuzují."
-      ]
-    },
-    {
-      "question": "74) Natáčení magnetických momentů domén podle směru vnějšího magnetického pole se vyskytuje",
-      "answer": [
-        "U feromagnetik – jejich domény se orientují podle vnějšího pole.",
-        "Tento jev je klíčový pro jejich silnou magnetickou odezvu.",
-        "Neprobíhá u diamagnetik ani paramagnetik, které nemají trvalé domény.",
-        "Ferimagnetika mají podobné chování, ale jejich momenty nejsou zcela zarovnány."
-      ]
-    },
-    {
-      "question": "75) Mezi charakteristické vlastnosti magneticky měkkých materiálů patří",
-      "answer": [
-        "Úzká hysterezní smyčka – značí nízké ztráty při magnetizaci.",
-        "Nízká koercitivní intenzita (typicky <1 kA/m) – snadné přemagnetování.",
-        "Snadné zmagnetování i odmagnetování – vhodné pro elektromagnety, jádra transformátorů.",
-        "Používají se v aplikacích, kde dochází k častým změnám magnetického pole."
-      ]
-    },
-    {
-      "question": "76) Plechy z křemíkových ocelí",
-      "answer": [
-        "Používají se k výrobě magnetických obvodů transformátorů.",
-        "Obsahují křemík pro snížení ztrát vířivými proudy.",
-        "Křemík zlepšuje elektrický odpor a snižuje ztráty při střídavém magnetickém poli."
-      ]
-    },
-    {
-      "question": "77) Minerální oleje se nepoužívají jako izolant",
-      "answer": [
-        "Minerální oleje se používají jako izolanty v transformátorech a některých motorech.",
-        "Nepoužívají se jako izolanty ve výkonových polovodičích nebo v rezistorech.",
-        "Jejich funkce zahrnuje jak chlazení, tak elektrickou izolaci."
-      ]
-    },
-    {
-      "question": "78) Základními oxidy používanými při výrobě skla jsou",
-      "answer": [
-        "Oxid křemičitý (SiO₂) – tvoří základní stavební jednotku většiny skel.",
-        "Oxid boritý (B₂O₃) – snižuje teplotu tání a zvyšuje chemickou odolnost.",
-        "Používají se i další oxidy, např. sodný nebo hlinitý, v menší míře jako přísady."
-      ]
-    },
-    {
-      "question": "79) Papír se v elektrotechnice používá",
-      "answer": [
-        "Jako výztuž levných desek plošných spojů.",
-        "Ve formě speciálního izolačního papíru ve spojení s olejem v transformátorech.",
-        "Méně často jako dielektrikum v elektrolytických kondenzátorech."
-      ]
-    },
-    {
-      "question": "80) Mezi speciální dielektrika patří",
-      "answer": [
-        "Pyroelektrika – jejich polarizace závisí na teplotě.",
-        "Feroelektrika – vykazují spontánní polarizaci a hysterézi.",
-        "Piezoelektrika – jejich polarizace závisí na mechanickém namáhání.",
-        "Všechna výše uvedená jsou speciální dielektrika."
-      ]
-    },
-    {
-      "question": "81) Kapalné krystaly se mohou vyskytovat ve fázi",
-      "answer": [
-        "Nematické – molekuly jsou uspořádány orientačně, ale ne pozičně.",
-        "Smektické – molekuly jsou uspořádány ve vrstvách.",
-        "Cholesterické – derivát nematické fáze s spirálovým uspořádáním.",
-        "Tyto fáze jsou základními typy uspořádání kapalných krystalů."
-      ]
-    }
-  ]
+  eltm:
+    [
+      {
+        "question": "1) Vodíková vazba",
+        "answer": [
+          "patří mezi sekundární vazby; je slabší než vazba kovalentní.",
+          "Vysvětlení: Vodíková vazba je klasifikována jako sekundární vazba (interakce). Je přibližně o dva řády slabší než primární kovalentní či iontová vazba. Vzniká jako přitažlivá síla mezi atomy vodíku a atomy s volným elektronovým párem v sousedních molekulách, typicky pokud je vodík kovalentně vázán na silně elektronegativní prvek, jako je kyslík nebo dusík."
+        ]
+      },
+      {
+        "question": "2) Označení intersticiální atom (intersticiál) se používá",
+        "answer": [
+          "pro atom umístěný v mezimřížkové poloze; pro jednu z bodových poruch.",
+          "Vysvětlení: Intersticiál (intersticiální atom) je jednou z bodových poruch ve struktuře krystalických látek. Tato porucha představuje atom umístěný v mezimřížkové poloze, narušující pravidelnost struktury v jednom bodě."
+        ]
+      },
+      {
+        "question": "3) Zkouška pevnosti v tahu",
+        "answer": [
+          "patří z hlediska rychlosti nárůstu síly mezi zkoušky statické; může sloužit k určení meze kluzu; je zkouška destruktivní.",
+          "Vysvětlení: Zkouška pevnosti v tahu je nejčastěji prováděnou mechanickou zkouškou. Z hlediska rychlosti nárůstu síly se řadí mezi statické zkoušky, protože je charakterizována konstantní rychlostí nárůstu síly. Slouží k zjištění pevnostních a plastických vlastností materiálu, přičemž výsledkem je tahový diagram, z něhož lze určit mez kluzu (napětí, při kterém dochází k prvním trvalým deformacím). Zkouška spočívá v postupném zatěžování zkušební tyče do přetržení, což ji činí destruktivní."
+        ]
+      },
+      {
+        "question": "4) Která tvrzení o litinách jsou pravdivé",
+        "answer": [
+          "jsou méně houževnaté než oceli; jsou křehčí než oceli.",
+          "Vysvětlení: Litiny jsou slitiny železa s uhlíkem, které obsahují více než přibližně 2 % uhlíku. Ve srovnání s ocelemi se vyznačují vysokou křehkostí a nízkou pružností, což znamená, že jsou méně houževnaté."
+        ]
+      },
+      {
+        "question": "5) Mezi kovy s vysokou teplotou tání patří",
+        "answer": [
+          "wolfram; zirkonium.",
+          "Vysvětlení: Mezi kovy s vysokou teplotou tání, které jsou definovány jako kovy s teplotou tání přibližně nad 2000 °C, patří wolfram a zirkonium. Wolfram má teplotu tání 3420 °C, což je nejvyšší ze všech kovů. Zirkonium má teplotu tání 1854 °C a je také zařazeno do této kategorie."
+        ]
+      },
+      {
+        "question": "6) V pásové teorii vodivosti pevných látek u polovodičů",
+        "answer": [
+          "je valenční a vodivostní pás oddělen zakázaným pásem menším než 3eV.",
+          "Vysvětlení: Podle pásové teorie vodivosti pevných látek je u polovodičů valenční pás zcela zaplněn elektrony, zatímco vodivostní pás je od něj oddělen zakázaným pásem s malou šířkou, obvykle menší než 3 eV."
+        ]
+      },
+      {
+        "question": "7) Supravodiče II. typu",
+        "answer": [
+          "obsahují tzv. vortexy; je možné chladit kapalným dusíkem nebo vodíkem.",
+          "Vysvětlení: Supravodiče II. typu jsou převážně slitiny, intermetalické sloučeniny a keramické materiály. Na rozdíl od supravodičů I. typu se u nich v mezistavu vyskytuje magnetické pole uvnitř supravodiče ve formě takzvaných vírů (vortexů). Mnoho supravodičů II. typu, zejména vysokoteplotní supravodiče s kritickou teplotou nad 30 K, lze chladit výrazně levnějšími médii, jako je kapalný vodík (LH2, 20,3 K) nebo kapalný dusík (LN2, 77,4 K), na rozdíl od nízkoteplotních supravodičů, které vyžadují kapalné helium (LHe, 4,2 K)."
+        ]
+      },
+      {
+        "question": "8) Stříbro má",
+        "answer": [
+          "elektrickou i tepelnou vodivost nejvyšší ze všech kovů.",
+          "Vysvětlení: Stříbro se vyznačuje nejvyšší elektrickou i tepelnou vodivostí ze všech kovů. Jeho měrná vodivost je 63,0 x 10^6 S.m^-1, což je nejvyšší hodnota mezi uvedenými materiály v tabulce."
+        ]
+      },
+      {
+        "question": "9) Mezi požadavky na kontaktové materiály patří",
+        "answer": [
+          "velká tepelná vodivost; vysoká elektrická vodivost; malý přechodový odpor.",
+          "Vysvětlení: Na materiály používané pro kontakty se klade několik klíčových požadavků pro zajištění spolehlivého spojení dvou vodičů, kterými prochází elektrický proud. Mezi tyto požadavky patří malý přechodový odpor, velká elektrická vodivost a velká tepelná vodivost. Dále se požaduje odolnost proti erozi způsobené elektrickým obloukem, mechanickému opotřebení a oxidaci."
+        ]
+      },
+      {
+        "question": "10) Pájky typu SAC",
+        "answer": [
+          "mají teplotu tání cca 220 stupňů; mají teplotu tání vyšší než pájky olovnaté.",
+          "Vysvětlení: Pájky typu SAC (obvykle slitiny cínu, stříbra a mědi, např. SnAgCu) patří mezi měkké pájky s teplotou tání do 450 °C. Jejich typická teplota tání se pohybuje kolem 220 °C, což je vyšší hodnota než u tradičních olovnatých pájek (např. SnPb eutektikum taje při 183 °C). Používají se pro méně mechanicky namáhané spoje."
+        ]
+      },
+      {
+        "question": "11) Nevlastní vodivost u polovodičových materiálů",
+        "answer": [
+          "je způsobena donory a akceptory; je vyvolána procesem tzv. dopování.",
+          "Vysvětlení: Nevlastní vodivost u polovodičových materiálů je výsledkem procesu zvaného dotování neboli dopování. Při tomto procesu jsou atomy polovodiče nahrazeny atomy cizích prvků, které fungují buď jako donory (prvky z V. skupiny, např. fosfor, antimon, arsen), dodávající přebytek elektronů a vytvářející polovodič typu N, nebo jako akceptory (prvky z III. skupiny, např. bor, indium, galium, hliník), které vytvářejí díry a vedou k polovodiči typu P."
+        ]
+      },
+      {
+        "question": "12) Mezi plynové lasery patří",
+        "answer": [
+          "helium-neonový laser; argonový laser.",
+          "Vysvětlení: Plynové lasery generují paprsek v plynném prostředí. Mezi typické plynové lasery patří například helium-neonový (He-Ne) laser, argonový (Ar) laser a CO2 laser."
+        ]
+      },
+      {
+        "question": "13) Magnetická indukce",
+        "answer": [
+          "se značí B; je vektor.",
+          "Vysvětlení: Magnetická indukce je jednou z veličin používaných pro makroskopický popis magnetik. Značí se písmenem B a její jednotkou je Tesla (T). Magnetická indukce v materiálu je vyjádřena vztahem B = μ * H, kde μ je permeabilita a H je intenzita magnetického pole. (Informace, že magnetická indukce je vektorová veličina, není explicitně uvedena v poskytnutých zdrojích, avšak v kontextu fyziky magnetických polí je B chápáno jako vektor.)"
+        ]
+      },
+      {
+        "question": "14) Diamagnetika mají",
+        "answer": [
+          "relativní permeabilitu menší než 1.",
+          "Vysvětlení: Diamagnetika jsou látky, které po vložení do vnějšího magnetického pole vytváří pole opačné orientace, čímž zeslabují celkové magnetické pole. Jejich magnetická susceptibilita (χm) je záporná a relativní permeabilita (μr) je menší než 1. Příkladem diamagnetických látek jsou vzácné plyny, voda, sklo, grafit nebo některé kovy jako měď a zlato, a také supravodiče."
+        ]
+      },
+      {
+        "question": "15) Mezi magnetické tvrdé materiály patří",
+        "answer": [
+          "slitiny typu AlNiCo; materiály typu NdBFe.",
+          "Vysvětlení: Magneticky tvrdé materiály jsou charakteristické tím, že se obtížně magnetizují, ale zároveň si magnetizaci dlouhodobě uchovávají. Používají se především k výrobě permanentních magnetů. Mezi nejčastěji používané skupiny patří slitinové magnety AlNiCo (slitiny železa s hliníkem, niklem a kobaltem) a magnety na bázi vzácných zemin, jako jsou neodymové magnety (intermetalické sloučeniny Nd2Fe14B), které patří mezi nejsilnější magnety s nejvyššími hodnotami energetického součinu."
+        ]
+      },
+      {
+        "question": "16) Na výrobu permanentních magnetů se používají materiály na bázi",
+        "answer": [
+          "feritů; slitin Al-Ni-Co; vzácných zemin(Sm, Nd).",
+          "Vysvětlení: Pro výrobu permanentních magnetů se využívají magneticky tvrdé materiály, které si po zmagnetování uchovávají silnou magnetizaci. Mezi nejčastěji používané materiály patří slitiny Al-Ni-Co, tvrdé ferity a magnety na bázi vzácných zemin, jako jsou sloučeniny samaria (Sm) a neodymu (Nd). Tyto materiály mají širokou hysterezní smyčku a vysoké hodnoty remanentní indukce."
+        ]
+      },
+      {
+        "question": "17) Dielektrické materiály",
+        "answer": [
+          "se používají jako elektrické izolanty; mají schopnost polarizovat.",
+          "Vysvětlení: Dielektrické materiály jsou látky, které se používají jako elektrické izolanty, tedy materiály, které nevedou elektrický proud a slouží k oddělování míst s různým elektrickým potenciálem. Jejich základní charakteristikou je schopnost polarizace ve vnějším elektrickém poli, což znamená narušení symetrie rozdělení elektrického náboje v materiálu."
+        ]
+      },
+      {
+        "question": "18) Mezi běžné plynné izolanty patří",
+        "answer": [
+          "dusík; vzduch.",
+          "Vysvětlení: Plynné izolanty se dělí na běžné plyny, vzácné plyny a elektronegativní plyny. Mezi běžné plynné izolanty, které jsou složkami vzduchu, patří vzduch samotný (směs plynů, z níž 78 % tvoří dusík a 21 % kyslík) a dusík. Vzduch je nejběžnějším plynným izolantem používaným například ve venkovním vedení nebo vzduchových kondenzátorech, zatímco dusík je inertní plyn používaný k plnění vysokonapěťových kabelů nebo jako chladící médium."
+        ]
+      },
+      {
+        "question": "19) Minerální oleje",
+        "answer": [
+          "se získávají rafinací z ropy; se používají jako izolanty v transformátorech.",
+          "Vysvětlení: Minerální oleje jsou směsi uhlovodíků, které se získávají destilací ropy. V elektrotechnice se široce používají jako kapalné izolanty, zejména ve vysokonapěťových a velmi vysokonapěťových transformátorech, kde plní nejen izolační, ale i chladicí funkci. Je však třeba dbát na jejich stárnutí a vlhkost, které zhoršují izolační vlastnosti."
+        ]
+      },
+      {
+        "question": "20) Slída se v elektrotechnice používá",
+        "answer": [
+          "jako součást izolačních systémů vn zařízení; v kondenzátorech.",
+          "Vysvětlení: Slída je krystalický vrstevnatý minerál s velmi dobrými elektrickými vlastnostmi, vysokou elektrickou pevností (až 100 kV/mm) a vysokou teplotní odolností (až 900 °C). V elektrotechnice se používá v různých formách. Lístková slída se využívá v kondenzátorech, jako podložky pod výkonové součástky nebo v topných elementech. Rekonstruovaná slída, zvaná remika, se používá jako součást izolačních systémů ve vysokonapěťových (VN) zařízeních, například pro izolaci vodičů velkých elektrických točivých strojů nebo v ohniodolných kabelech."
+        ]
+      },
+      {
+        "question": "21) Mezi pevné organické izolanty patří",
+        "answer": [
+          "papír; kalafuna.",
+          "Vysvětlení: Pevné organické izolanty jsou sloučeniny uhlíku, vodíku, kyslíku a dalších prvků, často ve formě makromolekulárních látek. Mezi přírodní organické izolanty patří papír, který se vyrábí z buničiny měkkého dřeva a často se používá v kombinaci s oleji nebo impregnovaný. Dále sem patří kalafuna, destilační zbytek z pryskyřice borovic, která se používá jako tavidlo pro pájení a součást elektroizolačních laků."
+        ]
+      },
+      {
+        "question": "22) Do skupiny termoplastů patří",
+        "answer": [
+          "polypropylen(PP); polyethylen(PE).",
+          "Vysvětlení: Termoplasty jsou syntetické organické izolační materiály, které při zahřívání měknou a lze je tvářet, přecházejí do taveniny a po ochlazení opět ztuhnou, přičemž tento proces je opakovatelný. Jsou složeny z lineárních makromolekul, spojených slabými nevazebnými interakcemi. Do této skupiny patří například polyethylen (PE) a polypropylen (PP). Často se používají jako izolace vodičů a kabelů, k výrobě izolátorů nebo fólií."
+        ]
+      },
+      {
+        "question": "23) Zkratkou PTFE označujeme polymer",
+        "answer": [
+          "polytetrafluorethylen.",
+          "Vysvětlení: Zkratkou PTFE se označuje polymer polytetrafluorethylen. Tento termoplastický materiál se vyznačuje vysokou elektrickou pevností (60–70 kV/mm) a nízkou relativní permitivitou (2,0–2,1)."
+        ]
+      },
+      {
+        "question": "24) Pyroelektrika",
+        "answer": [
+          "se využívají jako detektory pohybu; patří do skupiny feroelektrických látek; mají teplotní závislost polarizace.",
+          "Vysvětlení: Pyroelektrika jsou podskupinou piezoelektrických materiálů, které se vyznačují samovolnou polarizací měnící se s teplotou. Feroelektrické materiály jsou pak speciálním případem pyroelektrik. Velikost dipólového momentu pyroelektrických látek je přímo úměrná změně teploty. Využívají se například jako teplotní čidla pro infračervené záření nebo jako detektory pohybu."
+        ]
+      },
+      {
+        "question": "25) Kovová vazba",
+        "answer": [
+          "má elektrostatický charakter; je tvořena kladnými ionty a volnými elektrony.",
+          "Vysvětlení: Kovová vazba je typ primární chemické vazby, která je charakteristická pro kovy. Je tvořena kationty kovu uspořádanými v mřížce a volnými elektrony, které se pohybují v celém objemu látky (tzv. elektronový plyn). Tato vazba má elektrostatický charakter."
+        ]
+      },
+      {
+        "question": "26) Iontová vazba",
+        "answer": [
+          "vznikne předáním elektronů jednoho prvku druhému; je nejsilnější mezi prvky I. a VII. skupiny PSP; má elektrostatický charakter.",
+          "Vysvětlení: Iontová vazba je chemická vazba, která vzniká předáním jednoho či více elektronů mezi atomy, což vede ke vzniku iontů s opačným znaménkem (kationtů a aniontů). Tato vazba má elektrostatický charakter a je typická pro iontové krystaly, jako jsou soli alkalických kovů (např. NaCl). Je nejsilnější při reakci prvků I. a VII. skupiny periodické soustavy prvků, kde je velký rozdíl v elektronegativitě."
+        ]
+      },
+      {
+        "question": "27) Van der Waalsova vazba",
+        "answer": [
+          "je slabší než vazba kovalentní; je založena na vzájemném působením dipólů v molekulách; patří mezi sekundární vazby.",
+          "Vysvětlení: Van der Waalsova vazba (síla) patří mezi sekundární vazby (interakce). Je přibližně o dva řády slabší než primární kovalentní či iontová vazba. Tato vazba je založena na vzájemném působení molekulových dipólů, které vznikají díky okamžitému nerovnoměrnému rozložení elektronů v neutrálních molekulách."
+        ]
+      },
+      {
+        "question": "28) Čisté kovy jsou ve srovnání se slitinami",
+        "answer": [
+          "zpravidla měkké, tvárné, odolné pro korozi; lépe elektricky vodivé.",
+          "Vysvětlení: Čisté kovy se ve srovnání se slitinami obecně vyznačují tím, že jsou měkké, tvárné a mají menší pevnost. Zároveň jsou velmi dobře elektricky vodivé a odolné proti korozi. Naproti tomu slitiny kovů jsou tvrdší, pevnější, ale hůře tvárné a mají horší elektrickou vodivost."
+        ]
+      },
+      {
+        "question": "29) Oceli se ve elektrotechnice používají na výrobu",
+        "answer": [
+          "stožárů vn a vvn; hřídelí točivých strojů.",
+          "Vysvětlení: Oceli jsou technicky nejvýznamnější kovy a v elektrotechnice nacházejí široké uplatnění, zejména ve formě konstrukčních ocelí. Používají se například na výrobu stožárů velmi vysokého napětí (VVN), hřídelí točivých strojů, malých rotorů, svorníků transformátorů, koster asynchronních motorů a těles ložisek synchronních generátorů."
+        ]
+      },
+      {
+        "question": "30) Na výrobu lehkých a pevných konstrukčních prvků se používají slitiny",
+        "answer": [
+          "hliníku; titan.",
+          "Vysvětlení: Pro výrobu lehkých a pevných konstrukčních prvků se často využívají slitiny lehkých kovů. Hliník je lehký kov (hustota 2700 kg/m³) a jeho lehké pevné slitiny, jako je dural (Al+Mg+Cu) nebo siluminy (Al+Si), nacházejí uplatnění v leteckém a automobilovém průmyslu, strojírenství a elektrotechnice. Titan je také velmi lehký (hustota 4500 kg/m³) a vyznačuje se vysokou pevností (vyšší než ocel) a výbornou korozní odolností, což ho činí vhodným pro leteckou, kosmickou a lékařskou techniku."
+        ]
+      },
+      {
+        "question": "31) Mezi bodové poruchy patří",
+        "answer": [
+          "vakance; intersticiál; substituční atom.",
+          "Vysvětlení: Bodové poruchy v krystalických látkách představují narušení pravidelnosti struktury v jednom místě. Mezi tyto poruchy patří vakance (chybějící atom v mřížce), intersticiál (atom umístěný v mezimřížkové poloze) a substituční atom (příměs nahrazující atom v mřížce)."
+        ]
+      },
+      {
+        "question": "32) Žárupevnost materiálu je",
+        "answer": [
+          "schopnost materiálu dlouhodobě snášet větší namáhaní za vyšších teplot.",
+          "Vysvětlení: Žárupevnost je mechanická vlastnost materiálu, která vyjadřuje jeho schopnost dlouhodobě přenášet větší namáhání za vyšších teplot. Jedná se tedy o pevnost materiálu za zvýšených teplot."
+        ]
+      },
+      {
+        "question": "33) Slitiny železa",
+        "answer": [
+          "bohaté na uhlík označujeme jako litiny; chudé na uhlík označujeme jako oceli.",
+          "Vysvětlení: Slitiny železa s uhlíkem se dělí podle obsahu uhlíku. Slitiny s obsahem uhlíku přibližně do 2 % se označují jako oceli (tedy jsou chudé na uhlík), zatímco slitiny s obsahem uhlíku nad 2 % se nazývají litiny (tedy jsou bohaté na uhlík)."
+        ]
+      },
+      {
+        "question": "34) Zinek se používá",
+        "answer": [
+          "s mědí jako součást mosazných slitin; jako protikorozní ochrana ocelí.",
+          "Vysvětlení: Zinek je bílošedý kov s teplotou tání 419 °C. Používá se jako protikorozní ochrana ocelových výrobků prostřednictvím pozinkování. Dále je důležitou součástí slitin, například s mědí tvoří mosazi."
+        ]
+      },
+      {
+        "question": "35) V pásové teorii pevných látek zakázaný pás",
+        "answer": [
+          "má u izolantů šířku větší než 3 eV; u izolantů odděluje vodivostní a valenční pás.",
+          "Vysvětlení: V pásové teorii vodivosti pevných látek je zakázaný pás energetická mezera, která odděluje valenční pás (poslední pás obsahující elektrony) od vodivostního pásu (první neobsazený pás orbitalů). U izolantů má tento zakázaný pás velkou šířku, typicky větší než 3 eV, což brání elektronům v přesunu do vodivostního pásu a způsobuje nízkou elektrickou vodivost materiálu."
+        ]
+      },
+      {
+        "question": "36) Supravodiče",
+        "answer": [
+          "se používají pro generování silných magnetických polí; se používají ve speciálních přenosových kabelech v energetice; se dají využít k akumulaci elektrické energie.",
+          "Vysvětlení: Supravodiče jsou materiály, u nichž při velmi nízkých teplotách skokově klesá rezistivita na téměř nulovou hodnotu, což umožňuje vedení proudu bez Jouleových ztrát. Díky těmto vlastnostem mají řadu aplikací, včetně generování silných magnetických polí pomocí supravodivých magnetů, bezeztrátového přenosu elektrické energie ve speciálních kabelech a uchování (akumulace) elektrické energie."
+        ]
+      },
+      {
+        "question": "37) Která tvrzení o hliníku jsou pravdivá",
+        "answer": [
+          "jeho elektrická vodivost dosahuje přibližně 60% vodivosti mědi; používá se na elektrovodná lana vn, vvn, zvn.",
+          "Vysvětlení: Hliník je bílošedý lehký kov. Jeho elektrická vodivost dosahuje přibližně 60 % elektrické vodivosti mědi, což ho řadí mezi nejlepší vodiče. Díky své nízké hustotě a dobré vodivosti se široce používá na elektrovodná lana pro vysoké a velmi vysoké napětí (VN, VVN) a také v silnoproudých kabelech."
+        ]
+      },
+      {
+        "question": "38) Mezi nekovové odporové materiály patří",
+        "answer": [
+          "silit; grafit.",
+          "Vysvětlení: Mezi nekovové odporové materiály, které se používají pro vyšší pracovní teploty, patří Silit (karbid křemíku, SiC) a uhlíkové nebo grafitové topné materiály. Silit je křehký, ale použitelný až do 1600 °C, zatímco uhlíkové a grafitové materiály mohou pracovat až do 2500 °C ve vakuu nebo ochranné atmosféře."
+        ]
+      },
+      {
+        "question": "39) U polovodičů typu N platí, že",
+        "answer": [
+          "jako příměsi se používají donory, např. As, P, Sb; majoritním nosičem jsou elektrony.",
+          "Vysvětlení: U polovodičů typu N, které vznikají procesem dopování (dotování) základního polovodiče, se jako příměsi používají donory. Jde o prvky z V. skupiny periodické tabulky, jako je fosfor (P), antimon (Sb) nebo arsen (As). Tyto atomy dodávají do struktury přebytečné elektrony, které se stávají majoritními nosiči náboje."
+        ]
+      },
+      {
+        "question": "40) Pro kovové pájky platí, že",
+        "answer": [
+          "hranice mezi měkkými a tvrdými pájkami je 450 stupňů; se používají metalurgické spojování kovů.",
+          "Vysvětlení: Pájení je proces metalurgického spojení materiálů za použití přídavného materiálu – pájky. Kovové pájky se dělí na měkké a tvrdé, přičemž hranice mezi nimi je stanovena teplotou tání 450 °C; měkké pájky mají teplotu tání do 450 °C, zatímco tvrdé pájky nad 450 °C."
+        ]
+      },
+      {
+        "question": "41) U polovodičů typu P platí, že",
+        "answer": [
+          "jako příměsi se používají akceptory, např. B, In, Ga, Al; majoritním nosičem jsou díry.",
+          "Vysvětlení: U polovodičů typu P se jako příměsi používají akceptory. Jsou to prvky z III. skupiny periodické tabulky, například bor (B), indium (In), galium (Ga) nebo hliník (Al). Tyto příměsi vytvářejí v polovodiči díry, které se stávají majoritními nosiči náboje."
+        ]
+      },
+      {
+        "question": "42) Pro šíření optického signálu světlovodem musí pro index lomu jádra n1 a index lomu pláště n2 platit podmínka",
+        "answer": [
+          "n1 > n2.",
+          "Vysvětlení: Pro správné šíření optického signálu ve vláknovém světlovodu, který slouží k přenosu informace na optických kmitočtech, je klíčová podmínka pro indexy lomu jádra (n1) a pláště (n2). Index lomu jádra (n1) musí být větší než index lomu pláště (n2). Tato podmínka zajišťuje totální vnitřní odraz signálu uvnitř jádra a jeho efektivní přenos na velké vzdálenosti."
+        ]
+      },
+      {
+        "question": "43) Relativní permeabilita",
+        "answer": [
+          "má u paramagnetik hodnotu >1; má u diamagnetik hodnotu <1; se značí μr.",
+          "Vysvětlení: Relativní permeabilita (μr) je materiálová veličina, která udává, kolikrát silnější je magnetické pole v materiálu v porovnání s polem stejné intenzity ve vakuu. U diamagnetik má relativní permeabilita hodnotu menší než 1 (μr < 1), zatímco u paramagnetik má hodnotu větší než 1 (μr > 1)."
+        ]
+      },
+      {
+        "question": "44) Po vložení paramagnetika do magnetického pole dojde",
+        "answer": [
+          "k mírnému zesílení magnetického pole.",
+          "Vysvětlení: Paramagnetika jsou látky, jejichž částice mají nevykompenzované magnetické momenty. Po vložení paramagnetika do vnějšího magnetického pole se tyto částice orientují ve shodě s vnějším polem, což vede k mírnému zesílení magnetického pole."
+        ]
+      },
+      {
+        "question": "45) Mezi charakteristické vlastnosti magnetického materiálu patří",
+        "answer": [
+          "relativní permeabilita; remanentní indukce.",
+          "Vysvětlení: Mezi charakteristické vlastnosti magnetických materiálů, které popisují jejich chování v magnetickém poli, patří relativní permeabilita (μr), jež udává, kolikrát silnější je magnetické pole v materiálu oproti vakuu. Dále je důležitá remanentní indukce (Br), což je hodnota magnetické indukce, která v materiálu zůstane po zmagnetování v uzavřeném obvodu a snížení intenzity magnetického pole na nulu."
+        ]
+      },
+      {
+        "question": "46) Magnetická kovová skla",
+        "answer": [
+          "jsou amorfní magnetické materiály, většinou na bázi Fe; patří mezi magneticky měkké materiály.",
+          "Vysvětlení: Magnetická kovová skla, známá také jako amorfní kovové slitiny, jsou materiály, u nichž v důsledku prudkého ochlazení nedošlo k vytvoření krystalické mřížky, a proto mají amorfní strukturu. Patří mezi magneticky měkké materiály, což znamená, že se snadno magnetizují i odmagnetovávají. Jejich složení je často na bázi železa, kobaltu nebo niklu s přídavkem boru, uhlíku, fosforu nebo křemíku, například METGLAS."
+        ]
+      },
+      {
+        "question": "47) Ztrátový úhel u dielektrických materiálů",
+        "answer": [
+          "představuje míru energie přeměněnou na teplo; je doplňkový úhel do 90° k úhlu φ.",
+          "Vysvětlení: Ztrátový úhel (δ) u dielektrických materiálů je klíčový parametr související s dielektrickými ztrátami. Tyto ztráty představují elektrickou energii přeměněnou na teplo za jednotku času v jednotce objemu. Ztrátový úhel δ je doplňkový úhel do 90° k úhlu fázového posunu φ mezi proudem a napětím (δ = 90° - φ). Jeho tangens (tg δ) je pak nazýván ztrátovým činitelem a obvyklé hodnoty se pohybují v rozmezí 10^-1 až 10^-5."
+        ]
+      },
+      {
+        "question": "48) Fluorid sírový se v elektrotechnice používá",
+        "answer": [
+          "v zapouzdřených rozvodnách.",
+          "Vysvětlení: Fluorid sírový (SF6) je elektronegativní plyn vyznačující se vysokou elektrickou pevností (až 5x vyšší než vzduch při stejném tlaku). V elektrotechnice se používá k plnění suchých transformátorů, vysokonapěťových vypínačů a jako izolační náplň v zapouzdřených rozvodnách a některých typech silových kabelů."
+        ]
+      },
+      {
+        "question": "49) Keramika se používá na výrobu",
+        "answer": [
+          "izolátorů; průchodek.",
+          "Vysvětlení: Keramika je pevný, polykrystalický materiál, který vzniká vypálením anorganických nekovových surovin. V elektrotechnice se široce používá pro své výborné izolační vlastnosti, velkou pevnost a tvrdost i za vysokých teplot. Konkrétně silikátové keramiky, jako je porcelán nebo steatit, se využívají na výrobu izolátorů pro elektrická vedení a průchodek transformátorů a dalších zařízení."
+        ]
+      },
+      {
+        "question": "50) Kalafuna",
+        "answer": [
+          "se získávají ze smoly jehličnanů; se používá jako tavidlo při pájení; se řadí do skupiny organických pevných izolantů.",
+          "Vysvětlení: Kalafuna je přírodní organický pevný izolant, který je destilačním zbytkem z pryskyřice borovic, tvořený zejména organickými kyselinami. V elektrotechnice se hojně používá jako tavidlo pro pájení, protože horká kalafuna reaguje podobně jako silné kyseliny a rozpouští kovy i jejich oxidy, čímž usnadňuje tvorbu pájeného spoje."
+        ]
+      },
+      {
+        "question": "51) Mezi plasty s vysokou tepelnou odolností (více než 200 stupňů) patří",
+        "answer": [
+          "silikon (SI); polytetrafluorethylen (PTFE).",
+          "Vysvětlení: Mezi plasty vyznačující se vysokou tepelnou odolností, tedy schopností pracovat při teplotách přesahujících 200 °C, patří silikon (SI) a polytetrafluorethylen (PTFE). Silikony jsou organokřemičité polymery s výbornou odolností proti teplu v rozsahu -60 až 350 °C. Polytetrafluorethylen (PTFE) je termoplastický materiál. (Přesný teplotní rozsah pro PTFE není v poskytnutých zdrojích explicitně uveden, nicméně je obecně řazen mezi vysokoteplotní polymery.)"
+        ]
+      },
+      {
+        "question": "52) Termoplastické elastomery",
+        "answer": [
+          "se zpracovávají stejnými technologiemi jako termoplasty; mají při pokojové teplotě vlastnosti elastomerů.",
+          "Vysvětlení: Termoplastické elastomery (TPE) jsou polymerní systémy, které kombinují aplikační vlastnosti elastomerů, jako je vysoká elasticita při pokojové teplotě, se zpracovatelskými vlastnostmi termoplastů. To znamená, že je lze snadno zpracovávat stejnými technologiemi jako termoplasty, aniž by byla nutná vulkanizace."
+        ]
+      },
+      {
+        "question": "53) Mezi speciální dielektrika patří",
+        "answer": [
+          "piezoelektrika - jejich polarizace závisí na mechanické deformaci; pyroelektrika - mají teplotní závislost polarizace.",
+          "Vysvětlení: Speciální dielektrické materiály jsou látky, u nichž polarizace závisí na jiných faktorech než jen na intenzitě elektrického pole. Mezi ně patří piezoelektrika, u nichž je polarizace vyvolána pružnou mechanickou deformací. Dále sem patří pyroelektrika, což jsou látky se samovolnou polarizací, která se mění v závislosti na teplotě."
+        ]
+      },
+      {
+        "question": "54) Termotropní kapalné krystaly",
+        "answer": [
+          "se používají na výrobu displejů; vznikají tavením pevných krystalů.",
+          "Vysvětlení: Termotropní kapalné krystaly jsou organické krystalické polární látky, u nichž přechod do parakrystalického stavu (mezofáze) je způsoben změnou teploty (ohřevem, tedy tavením pevných krystalů). Tento stav je charakteristický tím, že se chovají jako kapaliny, ale molekuly jsou pravidelně uspořádány jako v krystalech. Jejich hlavní aplikací je zobrazovací technika, kde se využívají k výrobě různých typů displejů (LCD)."
+        ]
+      },
+      {
+        "question": "55) Vakance se používá pro označení",
+        "answer": [
+          "pro chybějící atom v krystalové mřížce; pro jednu z bodových poruch.",
+          "Vysvětlení: Vakance je typ bodové poruchy v krystalické struktuře látek, která představuje chybějící atom v krystalové mřížce. Jedná se o narušení pravidelnosti struktury v jediném bodě."
+        ]
+      },
+      {
+        "question": "56) Mezi kovy se střední nebo vysokou teplotou tání patří",
+        "answer": [
+          "Měď; Chrom.",
+          "Vysvětlení: Kovy se dělí podle teploty tání na kovy s nízkou (do 500 °C), střední (do 1500 °C) a vysokou (nad 2000 °C) teplotou tání. Mezi kovy se střední teplotou tání patří měď (Cu), která má teplotu tání 1084 °C. Chrom (Cr) je zařazen mezi kovy s vysokou teplotou tání."
+        ]
+      },
+      {
+        "question": "57) V pásové teorii vodivosti pevných látek u kovů",
+        "answer": [
+          "se vodivostní pás překrývá s valenčním pásem.",
+          "Vysvětlení: Podle pásové teorie vodivosti pevných látek je u kovů valenční pás buď zcela zaplněn elektrony, nebo se překrývá s vodivostním pásem. Absence energetické bariéry mezi těmito pásy a delokalizace elektronových orbitalů umožňují volný pohyb elektronů, což je důsledkem vysoké elektrické a tepelné vodivosti kovů."
+        ]
+      },
+      {
+        "question": "58) Bimetaly",
+        "answer": [
+          "se používají v tepelných jističích a termostatech; jsou tvořeny dvěma mechanicky spojenými kovy s různou délkovou roztažností.",
+          "Vysvětlení: Bimetaly jsou dvojkovové materiály složené ze dvou různých kovů nebo slitin s odlišnou délkovou roztažností, které jsou spolu mechanicky nebo metalurgicky spojeny. Při změně teploty dochází k různým změnám délky obou vrstev, což způsobuje ohyb bimetalického pásku. Tato vlastnost se využívá v tepelných jističích, termostatech a vratných tepelných pojistkách."
+        ]
+      },
+      {
+        "question": "59) Slitiny mědi",
+        "answer": [
+          "mosazi - slitiny mědi a zinku, kde část zinku může být nahrazena jiným kovem; bronzy - všechny slitiny mědi, kromě mosazí.",
+          "Vysvětlení: Slitiny mědi se obecně dělí na mosazi a bronzy. Mosazi jsou slitiny mědi a zinku, které jsou tvrdší a pevnější než čistá měď a lépe obrobitelné. Bronzy jsou pak definovány jako všechny ostatní slitiny mědi kromě mosazí, přičemž jsou označovány podle přidaného kovu, například cínový, hliníkový nebo niklový bronz."
+        ]
+      },
+      {
+        "question": "60) Vlastní (intrinsická) vodivost u polovodičových materiálů",
+        "answer": [
+          "je určena vodivostí základního materiálu.",
+          "Vysvětlení: Vlastní neboli intrinsická vodivost se vyskytuje ve všech polovodičích. Je dána inherentními vlastnostmi základního polovodičového materiálu, kde při teplotách nad 0 K dochází k excitaci některých elektronů z valenčního pásu do vodivostního pásu (elektronová vodivost) a zároveň vznikají volná místa (díry) ve valenčním pásu (děrová vodivost). Počet děr se rovná počtu vodivostních elektronů."
+        ]
+      },
+      {
+        "question": "61) Uhlík se v elektrotechnice používá",
+        "answer": [
+          "jako odporový materiál; jako kontaktový materiál.",
+          "Vysvětlení: Uhlík nachází v elektrotechnice uplatnění jako odporový materiál a také jako kontaktní materiál. Díky svým vlastnostem, jako je dobrá elektrická vodivost a nízký součinitel tření (samomaznost), je uhlík vhodný pro kluzné kontakty, například ve formě uhlíkových kartáčů v elektrických točivých strojích nebo sběračů proudu v elektrické trakci."
+        ]
+      },
+      {
+        "question": "62) Mezi diamagnetika patří",
+        "answer": [
+          "supravodiče; měď.",
+          "Vysvětlení: Diamagnetika jsou látky, které po vložení do vnějšího magnetického pole vytvářejí pole opačné orientace, čímž zeslabují magnetické pole. Mezi diamagnetické materiály patří některé kovy, jako je měď (Cu), a také supravodiče. Supravodiče jsou považovány za ideální diamagnetické materiály, neboť zcela vytlačují magnetické pole ze svého objemu, což je známé jako Meissnerův-(Ochsenfeldův) jev."
+        ]
+      },
+      {
+        "question": "63) Relativní permitivita vody jako silně polární látky je přibližně",
+        "answer": [
+          "80.",
+          "Vysvětlení: Relativní permitivita (εr) je materiálová veličina, která udává, kolikrát je schopnost polarizace daného materiálu vyšší než schopnost polarizace vakua. Voda je silně polární látka a její relativní permitivita je přibližně 80."
+        ]
+      },
+      {
+        "question": "64) Mezi magneticky měkké materiály patří",
+        "answer": [
+          "křemíkové oceli; Permalloye.",
+          "Vysvětlení: Magneticky měkké materiály se vyznačují snadným zmagnetováním a odmagnetováním, úzkou hysterezní smyčkou a vysokou permeabilitou. Používají se pro obvody se střídavou magnetizací. Mezi tyto materiály patří elektrotechnické (křemíkové) oceli, které se používají pro stavbu magnetických obvodů transformátorů a motorů, a také slitiny Fe-Ni, známé jako Permalloye, které mají velmi vysokou počáteční permeabilitu."
+        ]
+      },
+      {
+        "question": "65) Mezi charakteristické vlastnosti plynných izolantů patří",
+        "answer": [
+          "nízké dielektrické ztráty; schopnost regenerace po průrazu; dielektrické ztráty nezávislé na frekvenci.",
+          "Vysvětlení: Plynné izolanty se vyznačují několika charakteristickými vlastnostmi, které je činí vhodnými pro specifické aplikace. Mají nízké dielektrické ztráty, které jsou prakticky nezávislé na frekvenci. Důležitou vlastností je také jejich schopnost regenerace, což znamená, že po elektrickém průrazu (přeskoku) jsou schopny obnovit své izolační schopnosti. Dále mají nízkou relativní permitivitu (o málo vyšší než 1) a rovnoměrně vyplňují prostor."
+        ]
+      },
+      {
+        "question": "66) Jako kapalné izolanty se v elektrotechnice používají",
+        "answer": [
+          "minerální oleje; syntetické oleje.",
+          "Vysvětlení: Kapalné izolanty se v elektrotechnice používají pro své výhody, jako je vysoká elektrická pevnost, dobrý odvod tepla a schopnost vyplňovat póry a dutiny. Dělí se podle původu na minerální oleje, které se získávají destilací ropy, a syntetické kapaliny (syntetické oleje), což jsou uměle připravené chemické sloučeniny. Minerální oleje se využívají například v transformátorech, zatímco syntetické kapaliny, jako silikonové oleje, se používají jako náhrada minerálních olejů v zařízeních, kde je vyžadována vyšší permitivita nebo nižší hořlavost."
+        ]
+      },
+      {
+        "question": "67) Polymery s lineární strukturou jsou",
+        "answer": [
+          "převážně termoplasty; většinou dobře tavitelné.",
+          "Vysvětlení: Polymery s lineární strukturou makromolekul jsou převážně termoplasty. Tyto materiály jsou složeny z dlouhých lineárních řetězců spojených slabými nevazebnými interakcemi. Díky tomu při zahřívání měknou a přecházejí do taveniny, což je činí dobře tavitelnými a tvarovatelnými. Po ochlazení opět ztuhnou, a tento proces je opakovatelný."
+        ]
+      },
+      {
+        "question": "68) Elastomery",
+        "answer": [
+          "jsou materiály, u kterých již při působení malých sil dochází k velké vratné deformaci.",
+          "Vysvětlení: Elastomery jsou polymery, které se vyznačují vysokou hodnotou mezní elastické deformace. To znamená, že již při působení malých mechanických sil u nich dochází k velkým vratným rozměrovým změnám. Příkladem elastomerů jsou pryže, jejichž struktura je tvořena dlouhými deformovanými lineárními molekulami se sítí vzájemných kovalentních vazeb, což umožňuje tuto vratnou deformaci."
+        ]
+      },
+      {
+        "question": "69) Feroelektrika jsou",
+        "answer": [
+          "materiály používané jako dielektrika v kondenzátorech; obdobou feromagnetických látek v elektrickém poli.",
+          "Vysvětlení: Feroelektrika jsou speciálním typem pyroelektrických materiálů. Vyznačují se tím, že se v elektrickém poli chovají obdobně jako feromagnetické látky v magnetickém poli, a to díky podobné doménové struktuře a závislosti polarizace na intenzitě elektrického pole, která vytváří hysterezní smyčku. Díky velmi vysokým hodnotám permitivity (10^2 – 10^4) se feroelektrické materiály, jako je barium titanát (BaTiO3), často používají jako dielektrika v kondenzátorech."
+        ]
+      },
+      {
+        "question": "70) Pro vznik termotropních kapalných krystalů je potřeba",
+        "answer": [
+          "určitá oblast teplot.",
+          "Vysvětlení: Pro vznik termotropních kapalných krystalů je nezbytná určitá oblast teplot. U těchto organických krystalických látek dochází k přechodu do parakrystalického stavu (mezofáze) působením změny teploty, tj. ohřevem. Tato mezofáze existuje mezi teplotou tání (Tm) a teplotou vyjasnění (Tc)."
+        ]
+      },
+      {
+        "question": "71) Pro vodivé materiály platí, že",
+        "answer": [
+          "nejlepší elektrickým vodičem je stříbro; nejlepší mají rezistivitu v řádu 0,00000001 Ωm.",
+          "Vysvětlení: Pro vodivé materiály platí, že nejlepším elektrickým vodičem je stříbro, které má ze všech kovů nejvyšší elektrickou vodivost. Měrný odpor stříbra je 0,0159 x 10^-6 Ω·m, což odpovídá řádu 0,00000001 Ω·m."
+        ]
+      },
+      {
+        "question": "72) Jako odporový materiál se používá",
+        "answer": [
+          "chromnikl; konstantan.",
+          "Vysvětlení: Jako odporové materiály se používají látky s vyšší rezistivitou než běžné vodiče. Mezi drátové odporové materiály patří například chromnikl (slitina Ni-Cr) a konstantan (slitina mědi s niklem). Chromnikl se využívá pro topné elementy v elektrotepelných zařízeních, které pracují při teplotách nad 1000 °C, zatímco konstantan se používá pro běžné rezistory a termoelektrické články."
+        ]
+      },
+      {
+        "question": "73) Pro výrobu jader optických vláknových světlovodů se používají",
+        "answer": [
+          "fluoridové sklo; syntetický křemen; polymethylmetakrylát.",
+          "Vysvětlení: Pro výrobu jader optických vláknových světlovodů, které slouží k přenosu informace na velké vzdálenosti, se používají materiály s specifickými optickými vlastnostmi. Mezi ně patří syntetický křemen (SiO2), který je nejběžnějším materiálem pro jádra, dále fluoridová skla, využívaná zejména pro infračervené pásmo, a také polymery, nejčastěji polymethylmetakrylát (PMMA), který je levnější alternativou."
+        ]
+      },
+      {
+        "question": "74) Natáčení magnetických momentů domén podle směru vnějšího magnetického pole se vyskytuje",
+        "answer": [
+          "feromagnetika; ferimagnetika.",
+          "Vysvětlení: Natáčení magnetických momentů domén podle směru vnějšího magnetického pole je charakteristické pro materiály s doménovou strukturou, jako jsou feromagnetika a ferimagnetika. U feromagnetik jsou to oblasti, kde jsou magnetické momenty atomů uspořádány paralelně. Ferimagnetika, jako jsou ferity, mají také doménovou strukturu, ale s neúplně kompenzovaným antiparalelním uspořádáním magnetických momentů."
+        ]
+      },
+      {
+        "question": "75) Mezi charakteristické vlastnosti magneticky měkkých materiálů patří",
+        "answer": [
+          "snadné zmagnetování i odmagnetování; koercitivní intenzita menší než 1kA/m; úzká hysterezní smyčka.",
+          "Vysvětlení: Magneticky měkké materiály jsou charakteristické tím, že se snadno magnetizují i odmagnetovávají. Projevuje se u nich úzká hysterezní smyčka, což znamená malou koercitivní intenzitu (Hc) – typicky menší než 1 kA/m. Tyto materiály se používají pro obvody se střídavou magnetizací."
+        ]
+      },
+      {
+        "question": "76) Plechy z křemíkových ocelí",
+        "answer": [
+          "se používají k výrobě magnetických obvodů transformátorů; obsahují křemík pro snížení ztrát vířivými proudy.",
+          "Vysvětlení: Plechy z křemíkových ocelí se používají pro stavbu magnetických obvodů transformátorů, motorů a generátorů. Křemík se přidává do oceli, aby se zvýšila její rezistivita. Vyšší rezistivita následně vede ke snížení ztrát vířivými proudy, které jsou důsledkem elektrické vodivosti feromagnetik."
+        ]
+      },
+      {
+        "question": "77) Minerální oleje se nepoužívají jako izolant",
+        "answer": [
+          "v motorech; v rezistorech; ve výkonových polovodičích.",
+          "Vysvětlení: Minerální oleje se v elektrotechnice používají jako kapalné izolanty a chladiva především ve vysokonapěťových transformátorech, průchodkách, olejových vypínačích a VN kondenzátorech. (Dostupné zdroje explicitně neuvádějí, ve kterých z uvedených aplikací, jako jsou motory, rezistory nebo výkonové polovodiče, se minerální oleje nepoužívají, pouze vymezují oblasti jejich použití.)"
+        ]
+      },
+      {
+        "question": "78) Základními oxidy používanými při výrobě skla jsou",
+        "answer": [
+          "oxid křemičitý; oxid hlinitý; oxid boritý; oxid sodný.",
+          "Vysvětlení: Sklo je anorganická amorfní pevná látka, která se vyrábí tavením základních surovin. Mezi klíčové sklotvorné oxidy patří oxid křemičitý (SiO2), který tvoří základ křemičitých a boritokřemičitých skel. Dále se přidávají oxid boritý (B2O3) pro boritokřemičitá skla, oxid hlinitý (Al2O3) a oxid sodný (Na2O), který slouží jako tavivo a pomáhá snížit teplotu tavení a stabilizovat sklovinu."
+        ]
+      },
+      {
+        "question": "79) Papír se v elektrotechnice používá",
+        "answer": [
+          "spolu s olejem jako izolační systém transformátorů; jako výztuž levných desek plošných spojů.",
+          "Vysvětlení: Elektrotechnický papír je porézní materiál vyráběný z buničiny, který se v suchém stavu vyznačuje dobrou rezistivitou, ale nízkou elektrickou pevností kvůli vzduchu v pórech. V elektrotechnice se proto často používá v kombinaci s oleji, tvořící izolační systém olej-papír, například v olejových transformátorech a kondenzátorech. Dále slouží jako výztuž pro výrobu levných desek plošných spojů (např. FR-1, FR-2)."
+        ]
+      },
+      {
+        "question": "80) Mezi speciální dielektrika patří",
+        "answer": [
+          "pyroelektrika; piezoelektrika; feroelektrika.",
+          "Vysvětlení: Speciální dielektrické materiály se liší od klasických dielektrik tím, že jejich polarizace může být ovlivněna i jinými faktory než jen vnějším elektrickým polem. Mezi tuto skupinu patří piezoelektrika, jejichž polarizace je vyvolána mechanickou deformací, pyroelektrika, která mají samovolnou polarizaci měnící se s teplotou, a feroelektrika, u nichž se samovolná polarizace mění s vnějším elektrickým polem, podobně jako feromagnetika v magnetickém poli."
+        ]
+      },
+      {
+        "question": "81) Kapalné krystaly se mohou vyskytovat ve fázi",
+        "answer": [
+          "smektické; nematické; cholesterické.",
+          "Vysvětlení: Kapalné krystaly jsou organické polární látky, které se v mezofázi (parakrystalickém stavu) chovají jako kapaliny, ale zároveň mají molekuly pravidelně uspořádané jako v krystalech. V této mezofázi se termotropní kapalné krystaly mohou vyskytovat v několika fázích uspořádání: smektické, kde jsou molekuly uspořádány v rovnoběžných vrstvách; nematické, kde jsou molekuly rovnoběžné, ale nejsou ve vrstvách; a cholesterické (chirální nematika), kde jsou molekuly uspořádány ve vrstvách s postupně pootočenými osami."
+        ]
+      }
+    ]
 };
